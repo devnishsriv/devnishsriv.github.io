@@ -1,176 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Test Website</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1200, initial-scale=1.0"/>
+<title>Creator Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet"/>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body{
-    font-family: Inter, Arial, sans-serif;
-    min-height:100vh;
-    background: linear-gradient(135deg,#0f172a,#1e293b,#312e81);
-    color:white;
-}
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --border: #e8e8e4;
+    --text-primary: #1a1a18;
+    --text-secondary: #7a7a72;
+    --accent: #1a1a18;
+    --accent-soft: #f0ede8;
+    --row-hover: #fafaf8;
+    --badge-bg: #f2f2ee;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+    --shadow-lg: 0 24px 64px rgba(0,0,0,0.16);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
 
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:24px 10%;
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 40px 32px 80px;
+  }
 
-.logo{
-    font-size:1.4rem;
-    font-weight:700;
-}
+  /* Header */
+  .header {
+    margin-bottom: 36px;
+    opacity: 0;
+    transform: translateY(-16px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+  .header-sub {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
 
-nav ul{
-    display:flex;
-    list-style:none;
-    gap:24px;
-}
+  /* Table card */
+  .table-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.15s forwards;
+  }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    opacity:.9;
-}
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead tr {
+    background: var(--accent-soft);
+  }
+  th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr {
+    transition: background 0.18s ease;
+  }
+  tbody tr:hover { background: var(--row-hover); }
 
-.hero{
-    min-height:85vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
-}
+  /* Row entrance animation */
+  tbody tr {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: rowIn 0.4s ease forwards;
+  }
 
-.card{
-    max-width:700px;
-    padding:50px;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:24px;
-}
+  .creator-name {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .creator-handle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
 
-.profile{
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    object-fit:cover;
-    border:4px solid rgba(255,255,255,.3);
-    margin-bottom:25px;
-}
+  .followers {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
 
-h1{
-    font-size:3rem;
-    margin-bottom:15px;
-}
+  .engagement {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .eng-high { background: #e8f5ee; color: #2a7a4e; }
+  .eng-mid  { background: #fef4e4; color: #b07020; }
+  .eng-low  { background: #f5e8e8; color: #8a3030; }
 
-p{
-    font-size:1.1rem;
-    line-height:1.7;
-    opacity:.9;
-}
+  .charges {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
 
-.buttons{
-    margin-top:30px;
-    display:flex;
-    gap:15px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
+  .niche-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--badge-bg);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    border: 1px solid var(--border);
+  }
 
-.btn{
-    padding:14px 28px;
-    border-radius:12px;
-    text-decoration:none;
-    font-weight:600;
-    transition:.3s;
-}
+  /* View button */
+  .btn-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    letter-spacing: 0.02em;
+  }
+  .btn-view:hover {
+    opacity: 0.82;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  }
+  .btn-view:active { transform: translateY(0); }
+  .btn-view svg { flex-shrink: 0; }
 
-.primary{
-    background:white;
-    color:#111827;
-}
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(240,240,236,0.45);
+    backdrop-filter: blur(14px) saturate(0.9);
+    -webkit-backdrop-filter: blur(14px) saturate(0.9);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+  }
+  .overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
 
-.secondary{
-    border:1px solid rgba(255,255,255,.3);
-    color:white;
-}
+  /* Modal */
+  .modal {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.92) translateY(16px);
+    transition: transform 0.32s cubic-bezier(0.34,1.4,0.64,1), opacity 0.28s ease;
+    opacity: 0;
+    cursor: zoom-in;
+    /* 3:2 aspect, max width */
+    width: min(72vw, 840px);
+    aspect-ratio: 3 / 2;
+  }
+  .overlay.open .modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  .modal.zoomed {
+    cursor: zoom-out;
+    transform: scale(1.38) !important;
+    transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1) !important;
+  }
 
-.btn:hover{
-    transform:translateY(-3px);
-}
+  .modal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
 
-footer{
-    text-align:center;
-    padding:30px;
-    opacity:.7;
-}
+  /* Close button */
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+    transition: background 0.15s ease, transform 0.15s ease;
+    z-index: 10;
+  }
+  .modal-close:hover { background: #fff; transform: scale(1.1); }
 
-@media(max-width:768px){
-    h1{
-        font-size:2.2rem;
-    }
+  /* Creator label inside modal */
+  .modal-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px 20px 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.42) 0%, transparent 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    pointer-events: none;
+  }
+  .modal-label span {
+    font-size: 12px;
+    opacity: 0.7;
+    font-weight: 300;
+    margin-left: 6px;
+  }
 
-    nav ul{
-        display:none;
-    }
+  /* Zoom hint */
+  .zoom-hint {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    pointer-events: none;
+    letter-spacing: 0.04em;
+  }
 
-    .card{
-        padding:35px 25px;
-    }
-}
+  /* Footer count */
+  .table-footer {
+    padding: 13px 18px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes rowIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Always desktop layout — no responsive breakpoints */
+  html { min-width: 1200px; }
 </style>
 </head>
 <body>
 
-<nav>
-    <div class="logo">My Website</div>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">About</a></li>
-    </ul>
-</nav>
+<header class="header">
+  <p class="header-label">Talent Roster</p>
+  <h1 class="header-title">Creator Directory</h1>
+  <p class="header-sub">35 creators · Click <em>View</em> to preview media kit</p>
+</header>
 
-<section class="hero">
-    <div class="card">
+<div class="table-card">
+  <table id="creatorTable">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Creator</th>
+        <th>Followers</th>
+        <th>Engagement</th>
+        <th>Charges / Post</th>
+        <th>Niche</th>
+        <th>Media Kit</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="table-footer">
+    <span id="countLabel">35 creators listed</span>
+    <span>Click any row to highlight · View opens media kit</span>
+  </div>
+</div>
 
-        <!-- Replace this URL with your own image later -->
-        <img
-        src="https://cdn.corenexis.com/files/c/4637163720.png"
-        class="profile"
-        alt="Profile">
+<!-- Overlay / Modal -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M1 1L13 13M13 1L1 13" stroke="#1a1a18" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <img id="modalImg" src="" alt="Media Kit"/>
+    <div class="modal-label" id="modalLabel">Creator Name <span>· Media Kit</span></div>
+    <div class="zoom-hint" id="zoomHint">Click to zoom</div>
+  </div>
+</div>
 
-        <h1>Hello, World 👋</h1>
+<script>
+const creators = [
+  { name:"Aria Chen",     handle:"@ariachen",      followers:"1.2M",  eng:6.4,  charges:"$4,200",  niche:"Lifestyle" },
+  { name:"Luca Moretti",  handle:"@lucamoretti",   followers:"820K",  eng:4.8,  charges:"$2,800",  niche:"Fitness" },
+  { name:"Priya Nair",    handle:"@priyanair",     followers:"540K",  eng:7.1,  charges:"$1,900",  niche:"Beauty" },
+  { name:"James Okafor",  handle:"@jamesokafor",   followers:"2.3M",  eng:3.2,  charges:"$7,500",  niche:"Tech" },
+  { name:"Sofia Ruiz",    handle:"@sofiaruiz",     followers:"390K",  eng:8.9,  charges:"$1,400",  niche:"Food" },
+  { name:"Noah Park",     handle:"@noahpark",      followers:"1.6M",  eng:5.1,  charges:"$5,100",  niche:"Travel" },
+  { name:"Zara Ahmed",    handle:"@zaraahmed",     followers:"710K",  eng:6.7,  charges:"$2,500",  niche:"Fashion" },
+  { name:"Ethan Brooks",  handle:"@ethanbrooks",   followers:"290K",  eng:9.3,  charges:"$980",    niche:"Gaming" },
+  { name:"Maya Singh",    handle:"@mayasingh",     followers:"1.1M",  eng:4.4,  charges:"$3,600",  niche:"Wellness" },
+  { name:"Carlos Lima",   handle:"@carloslima",    followers:"480K",  eng:5.6,  charges:"$1,700",  niche:"Finance" },
+  { name:"Isla Turner",   handle:"@islaturner",    followers:"880K",  eng:6.2,  charges:"$3,000",  niche:"Parenting" },
+  { name:"Ravi Patel",    handle:"@ravipatel",     followers:"650K",  eng:4.0,  charges:"$2,200",  niche:"Tech" },
+  { name:"Chloe Dupont",  handle:"@chloe.dupont",  followers:"320K",  eng:7.8,  charges:"$1,100",  niche:"Beauty" },
+  { name:"Finn O'Brien",  handle:"@finnobrn",      followers:"195K",  eng:8.5,  charges:"$720",    niche:"Fitness" },
+  { name:"Amina Hassan",  handle:"@aminahassan",   followers:"560K",  eng:5.3,  charges:"$1,950",  niche:"Fashion" },
+  { name:"Leo Zhang",     handle:"@leozhang",      followers:"1.8M",  eng:3.8,  charges:"$6,200",  niche:"Lifestyle" },
+  { name:"Grace Kim",     handle:"@gracekim",      followers:"430K",  eng:7.4,  charges:"$1,600",  niche:"Food" },
+  { name:"Omar Farouk",   handle:"@omarfarouk",    followers:"970K",  eng:5.9,  charges:"$3,400",  niche:"Travel" },
+  { name:"Talia Moore",   handle:"@taliamoore",    followers:"240K",  eng:9.7,  charges:"$850",    niche:"Art" },
+  { name:"Ben Nguyen",    handle:"@bennguyen",     followers:"1.4M",  eng:4.6,  charges:"$4,800",  niche:"Gaming" },
+  { name:"Sasha Ivanova", handle:"@sasha.iv",      followers:"370K",  eng:6.9,  charges:"$1,300",  niche:"Wellness" },
+  { name:"Diego Torres",  handle:"@diegotorres",   followers:"720K",  eng:5.2,  charges:"$2,600",  niche:"Finance" },
+  { name:"Nora Bjork",    handle:"@norabjork",     followers:"510K",  eng:6.1,  charges:"$1,800",  niche:"Lifestyle" },
+  { name:"Kwame Asante",  handle:"@kwameasante",   followers:"290K",  eng:8.2,  charges:"$1,050",  niche:"Music" },
+  { name:"Lily Wang",     handle:"@lilywang",      followers:"1.0M",  eng:4.9,  charges:"$3,500",  niche:"Beauty" },
+  { name:"Ivan Petrov",   handle:"@ivanpetrov",    followers:"600K",  eng:5.5,  charges:"$2,100",  niche:"Tech" },
+  { name:"Fatima Al-Sayed",handle:"@fatimaaas",    followers:"440K",  eng:7.0,  charges:"$1,550",  niche:"Food" },
+  { name:"Henry Walsh",   handle:"@henrywalsh",    followers:"810K",  eng:4.3,  charges:"$2,900",  niche:"Travel" },
+  { name:"Mia Johnson",   handle:"@miajohnson",    followers:"1.5M",  eng:3.6,  charges:"$5,400",  niche:"Parenting" },
+  { name:"Tobias Müller", handle:"@tobiasmuller",  followers:"270K",  eng:8.8,  charges:"$950",    niche:"Fitness" },
+  { name:"Ananya Sharma", handle:"@ananyasharma",  followers:"690K",  eng:6.3,  charges:"$2,400",  niche:"Fashion" },
+  { name:"Jake Collins",  handle:"@jakecollins",   followers:"380K",  eng:7.6,  charges:"$1,350",  niche:"Art" },
+  { name:"Yuki Tanaka",   handle:"@yukitanaka",    followers:"920K",  eng:5.0,  charges:"$3,200",  niche:"Gaming" },
+  { name:"Rosa Martinez", handle:"@rosamartinez",  followers:"310K",  eng:8.0,  charges:"$1,100",  niche:"Wellness" },
+  { name:"Samuel Osei",   handle:"@samuelosei",    followers:"1.1M",  eng:4.2,  charges:"$3,800",  niche:"Music" },
+];
 
-        <p>
-            This is my first GitHub Pages website.
-            I'm testing deployment, learning web development,
-            and building cool things on the internet.
-        </p>
+// Placeholder image seeds (picsum)
+const imgSeeds = [10,20,30,64,65,91,96,100,101,103,106,107,109,110,111,112,119,122,130,133,137,142,145,152,153,160,167,168,169,170,171,172,173,174,175];
 
-        <div class="buttons">
-            <a href="devnishsriv.github.io" class="btn primary">Get Started</a>
-            <a href="#" class="btn secondary">Learn More</a>
-        </div>
+function engClass(e) {
+  if (e >= 7) return 'eng-high';
+  if (e >= 4.5) return 'eng-mid';
+  return 'eng-low';
+}
 
-    </div>
-</section>
+const tbody = document.getElementById('tableBody');
 
-<footer>
-    © 2026 My Website. Built with HTML & CSS.
-</footer>
+creators.forEach((c, i) => {
+  const tr = document.createElement('tr');
+  tr.style.animationDelay = `${0.25 + i * 0.035}s`;
+  tr.innerHTML = `
+    <td style="color:var(--text-secondary);font-size:12px;">${i+1}</td>
+    <td>
+      <div class="creator-name">${c.name}</div>
+      <div class="creator-handle">${c.handle}</div>
+    </td>
+    <td class="followers">${c.followers}</td>
+    <td><span class="engagement ${engClass(c.eng)}">${c.eng}%</span></td>
+    <td class="charges">${c.charges}</td>
+    <td><span class="niche-badge">${c.niche}</span></td>
+    <td>
+      <button class="btn-view" data-index="${i}">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <circle cx="5.5" cy="5.5" r="4" stroke="white" stroke-width="1.4"/>
+          <path d="M8.5 8.5L11.5 11.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        View
+      </button>
+    </td>
+  `;
+  tbody.appendChild(tr);
+});
 
+// Modal logic
+const overlay   = document.getElementById('overlay');
+const modal     = document.getElementById('modal');
+const modalImg  = document.getElementById('modalImg');
+const modalLabel= document.getElementById('modalLabel');
+const modalClose= document.getElementById('modalClose');
+const zoomHint  = document.getElementById('zoomHint');
+let zoomed = false;
+
+function openModal(idx) {
+  const c = creators[idx];
+  const seed = imgSeeds[idx % imgSeeds.length];
+  modalImg.src = `https://picsum.photos/seed/${seed}/840/560`;
+  modalLabel.innerHTML = `${c.name} <span>· ${c.niche} · Media Kit</span>`;
+  overlay.classList.add('open');
+  zoomed = false;
+  modal.classList.remove('zoomed');
+  zoomHint.textContent = 'Click to zoom';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  zoomed = false;
+  modal.classList.remove('zoomed');
+  document.body.style.overflow = '';
+}
+
+// Button clicks
+tbody.addEventListener('click', e => {
+  const btn = e.target.closest('.btn-view');
+  if (btn) openModal(parseInt(btn.dataset.index));
+});
+
+// Zoom toggle on image click
+modal.addEventListener('click', e => {
+  if (e.target === modalClose || modalClose.contains(e.target)) return;
+  zoomed = !zoomed;
+  modal.classList.toggle('zoomed', zoomed);
+  zoomHint.textContent = zoomed ? 'Click to zoom out' : 'Click to zoom';
+});
+
+// Close button
+modalClose.addEventListener('click', e => {
+  e.stopPropagation();
+  closeModal();
+});
+
+// Click outside modal to close
+overlay.addEventListener('click', e => {
+  if (e.target === overlay) closeModal();
+});
+
+// ESC key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
 </body>
 </html>
