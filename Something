@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Test Website</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Inter, Arial, sans-serif;
+    min-height:100vh;
+    background: linear-gradient(135deg,#0f172a,#1e293b,#312e81);
+    color:white;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:24px 10%;
+}
+
+.logo{
+    font-size:1.4rem;
+    font-weight:700;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:24px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    opacity:.9;
+}
+
+.hero{
+    min-height:85vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    max-width:700px;
+    padding:50px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:24px;
+}
+
+.profile{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid rgba(255,255,255,.3);
+    margin-bottom:25px;
+}
+
+h1{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+p{
+    font-size:1.1rem;
+    line-height:1.7;
+    opacity:.9;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:14px 28px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.primary{
+    background:white;
+    color:#111827;
+}
+
+.secondary{
+    border:1px solid rgba(255,255,255,.3);
+    color:white;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    opacity:.7;
+}
+
+@media(max-width:768px){
+    h1{
+        font-size:2.2rem;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+    .card{
+        padding:35px 25px;
+    }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">My Website</div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div class="card">
+
+        <!-- Replace this URL with your own image later -->
+        <img
+        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43b?w=400"
+        class="profile"
+        alt="Profile">
+
+        <h1>Hello, World 👋</h1>
+
+        <p>
+            This is my first GitHub Pages website.
+            I'm testing deployment, learning web development,
+            and building cool things on the internet.
+        </p>
+
+        <div class="buttons">
+            <a href="#" class="btn primary">Get Started</a>
+            <a href="#" class="btn secondary">Learn More</a>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    © 2026 My Website. Built with HTML & CSS.
+</footer>
+
+</body>
+</html>
