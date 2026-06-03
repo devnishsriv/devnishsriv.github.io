@@ -404,8 +404,10 @@ creators.forEach((c, i) => {
   tr.innerHTML = `
     <td style="color:var(--text-secondary);font-size:12px;">${i+1}</td>
     <td>
-      <div class="creator-name">${c.name}</div>
-      <div class="creator-handle">${c.handle}</div>
+      <a href="https://instagram.com/rajatp_here/" target="_blank" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="creator-name" style="text-decoration: underline;">${c.name}</div>
+        <div class="creator-handle">${c.handle}</div>
+      </a>
     </td>
     <td class="followers">${c.followers}</td>
     <td><span class="engagement ${engClass(c.eng)}">${c.eng}%</span></td>
