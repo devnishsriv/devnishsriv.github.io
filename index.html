@@ -1,610 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Premium video editor portfolio. Specializing in high-retention edits, viral shorts, cinematic sound design, and YouTube pacing. Luffy-themed design system.">
-  <title>LUFFY | High-Conversion Video Editor & Visual Storyteller</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1200, initial-scale=1.0"/>
+<title>Creator Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --border: #e8e8e4;
+    --text-primary: #1a1a18;
+    --text-secondary: #7a7a72;
+    --accent: #1a1a18;
+    --accent-soft: #f0ede8;
+    --row-hover: #fafaf8;
+    --badge-bg: #f2f2ee;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+    --shadow-lg: 0 24px 64px rgba(0,0,0,0.16);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 40px 32px 80px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 36px;
+    opacity: 0;
+    transform: translateY(-16px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+  .header-sub {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  /* Table card */
+  .table-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.15s forwards;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead tr {
+    background: var(--accent-soft);
+  }
+  th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr {
+    transition: background 0.18s ease;
+  }
+  tbody tr:hover { background: var(--row-hover); }
+
+  /* Row entrance animation */
+  tbody tr {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: rowIn 0.4s ease forwards;
+  }
+
+  .creator-name {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .creator-handle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .followers {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .engagement {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .eng-high { background: #e8f5ee; color: #2a7a4e; }
+  .eng-mid  { background: #fef4e4; color: #b07020; }
+  .eng-low  { background: #f5e8e8; color: #8a3030; }
+
+  .charges {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .niche-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--badge-bg);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    border: 1px solid var(--border);
+  }
+
+  /* View button */
+  .btn-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    letter-spacing: 0.02em;
+  }
+  .btn-view:hover {
+    opacity: 0.82;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  }
+  .btn-view:active { transform: translateY(0); }
+  .btn-view svg { flex-shrink: 0; }
+
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(240,240,236,0.45);
+    backdrop-filter: blur(14px) saturate(0.9);
+    -webkit-backdrop-filter: blur(14px) saturate(0.9);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+  }
+  .overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Modal */
+  .modal {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.92) translateY(16px);
+    transition: transform 0.32s cubic-bezier(0.34,1.4,0.64,1), opacity 0.28s ease;
+    opacity: 0;
+    cursor: zoom-in;
+    /* 3:2 aspect, max width */
+    width: min(72vw, 840px);
+    aspect-ratio: 3 / 2;
+  }
+  .overlay.open .modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  .modal.zoomed {
+    cursor: zoom-out;
+    transform: scale(1.38) !important;
+    transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1) !important;
+  }
+
+  .modal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* Close button */
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+    transition: background 0.15s ease, transform 0.15s ease;
+    z-index: 10;
+  }
+  .modal-close:hover { background: #fff; transform: scale(1.1); }
+
+  /* Creator label inside modal */
+  .modal-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px 20px 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.42) 0%, transparent 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    pointer-events: none;
+  }
+  .modal-label span {
+    font-size: 12px;
+    opacity: 0.7;
+    font-weight: 300;
+    margin-left: 6px;
+  }
+
+  /* Zoom hint */
+  .zoom-hint {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    pointer-events: none;
+    letter-spacing: 0.04em;
+  }
+
+  /* Footer count */
+  .table-footer {
+    padding: 13px 18px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes rowIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Always desktop layout — no responsive breakpoints */
+  html { min-width: 1200px; }
+</style>
 </head>
 <body>
 
-  <!-- Particle Background Canvas -->
-  <canvas id="particle-canvas"></canvas>
+<header class="header">
+  <p class="header-label">Talent Roster</p>
+  <h1 class="header-title">Creator Directory</h1>
+  <p class="header-sub">35 creators · Click <em>View</em> to preview media kit</p>
+</header>
 
-  <!-- Custom Cursor Follower -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-outline" id="cursor-outline"></div>
+<div class="table-card">
+  <table id="creatorTable">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Creator</th>
+        <th>Followers</th>
+        <th>Engagement</th>
+        <th>Charges / Post</th>
+        <th>Niche</th>
+        <th>Media Kit</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="table-footer">
+    <span id="countLabel">35 creators listed</span>
+    <span>Click any row to highlight · View opens media kit</span>
+  </div>
+</div>
 
-  <!-- Header Navigation -->
-  <header id="header">
-    <div class="container">
-      <a href="#" class="logo hoverable">
-        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M2 12h20M12 2v20"></path>
+<!-- Overlay / Modal -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M1 1L13 13M13 1L1 13" stroke="#1a1a18" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <img id="modalImg" src="" alt="Media Kit"/>
+    <div class="modal-label" id="modalLabel">Creator Name <span>· Media Kit</span></div>
+    <div class="zoom-hint" id="zoomHint">Click to zoom</div>
+  </div>
+</div>
+
+<script>
+const creators = [
+  { name:"Rajat Pawar",   handle:"<a href='https://www.instagram.com/rajatp_here/' target='_blank' style='color:inherit; text-decoration:underline;'>@rajatp_here</a>",   followers:"1M",  eng:6.4,  charges:"$2,100",  niche:"Entertainment" },
+  { name:"Luca Moretti",  handle:"@lucamoretti",   followers:"820K",  eng:4.8,  charges:"$2,800",  niche:"Fitness" },
+  { name:"Priya Nair",    handle:"@priyanair",     followers:"540K",  eng:7.1,  charges:"$1,900",  niche:"Beauty" },
+  { name:"James Okafor",  handle:"@jamesokafor",   followers:"2.3M",  eng:3.2,  charges:"$7,500",  niche:"Tech" },
+  { name:"Sofia Ruiz",    handle:"@sofiaruiz",     followers:"390K",  eng:8.9,  charges:"$1,400",  niche:"Food" },
+  { name:"Noah Park",     handle:"@noahpark",      followers:"1.6M",  eng:5.1,  charges:"$5,100",  niche:"Travel" },
+  { name:"Zara Ahmed",    handle:"@zaraahmed",     followers:"710K",  eng:6.7,  charges:"$2,500",  niche:"Fashion" },
+  { name:"Ethan Brooks",  handle:"@ethanbrooks",   followers:"290K",  eng:9.3,  charges:"$980",    niche:"Gaming" },
+  { name:"Maya Singh",    handle:"@mayasingh",     followers:"1.1M",  eng:4.4,  charges:"$3,600",  niche:"Wellness" },
+  { name:"Carlos Lima",   handle:"@carloslima",    followers:"480K",  eng:5.6,  charges:"$1,700",  niche:"Finance" },
+  { name:"Isla Turner",   handle:"@islaturner",    followers:"880K",  eng:6.2,  charges:"$3,000",  niche:"Parenting" },
+  { name:"Ravi Patel",    handle:"@ravipatel",     followers:"650K",  eng:4.0,  charges:"$2,200",  niche:"Tech" },
+  { name:"Chloe Dupont",  handle:"@chloe.dupont",  followers:"320K",  eng:7.8,  charges:"$1,100",  niche:"Beauty" },
+  { name:"Finn O'Brien",  handle:"@finnobrn",      followers:"195K",  eng:8.5,  charges:"$720",    niche:"Fitness" },
+  { name:"Amina Hassan",  handle:"@aminahassan",   followers:"560K",  eng:5.3,  charges:"$1,950",  niche:"Fashion" },
+  { name:"Leo Zhang",     handle:"@leozhang",      followers:"1.8M",  eng:3.8,  charges:"$6,200",  niche:"Lifestyle" },
+  { name:"Grace Kim",     handle:"@gracekim",      followers:"430K",  eng:7.4,  charges:"$1,600",  niche:"Food" },
+  { name:"Omar Farouk",   handle:"@omarfarouk",    followers:"970K",  eng:5.9,  charges:"$3,400",  niche:"Travel" },
+  { name:"Talia Moore",   handle:"@taliamoore",    followers:"240K",  eng:9.7,  charges:"$850",    niche:"Art" },
+  { name:"Ben Nguyen",    handle:"@bennguyen",     followers:"1.4M",  eng:4.6,  charges:"$4,800",  niche:"Gaming" },
+  { name:"Sasha Ivanova", handle:"@sasha.iv",      followers:"370K",  eng:6.9,  charges:"$1,300",  niche:"Wellness" },
+  { name:"Diego Torres",  handle:"@diegotorres",   followers:"720K",  eng:5.2,  charges:"$2,600",  niche:"Finance" },
+  { name:"Nora Bjork",    handle:"@norabjork",     followers:"510K",  eng:6.1,  charges:"$1,800",  niche:"Lifestyle" },
+  { name:"Kwame Asante",  handle:"@kwameasante",   followers:"290K",  eng:8.2,  charges:"$1,050",  niche:"Music" },
+  { name:"Lily Wang",     handle:"@lilywang",      followers:"1.0M",  eng:4.9,  charges:"$3,500",  niche:"Beauty" },
+  { name:"Ivan Petrov",   handle:"@ivanpetrov",    followers:"600K",  eng:5.5,  charges:"$2,100",  niche:"Tech" },
+  { name:"Fatima Al-Sayed",handle:"@fatimaaas",    followers:"440K",  eng:7.0,  charges:"$1,550",  niche:"Food" },
+  { name:"Henry Walsh",   handle:"@henrywalsh",    followers:"810K",  eng:4.3,  charges:"$2,900",  niche:"Travel" },
+  { name:"Mia Johnson",   handle:"@miajohnson",    followers:"1.5M",  eng:3.6,  charges:"$5,400",  niche:"Parenting" },
+  { name:"Tobias Müller", handle:"@tobiasmuller",  followers:"270K",  eng:8.8,  charges:"$950",    niche:"Fitness" },
+  { name:"Ananya Sharma", handle:"@ananyasharma",  followers:"690K",  eng:6.3,  charges:"$2,400",  niche:"Fashion" },
+  { name:"Jake Collins",  handle:"@jakecollins",   followers:"380K",  eng:7.6,  charges:"$1,350",  niche:"Art" },
+  { name:"Yuki Tanaka",   handle:"@yukitanaka",    followers:"920K",  eng:5.0,  charges:"$3,200",  niche:"Gaming" },
+  { name:"Rosa Martinez", handle:"@rosamartinez",  followers:"310K",  eng:8.0,  charges:"$1,100",  niche:"Wellness" },
+  { name:"Samuel Osei",   handle:"@samuelosei",    followers:"1.1M",  eng:4.2,  charges:"$3,800",  niche:"Music" },
+];
+
+// Placeholder image seeds (picsum)
+const imgSeeds = [10,20,30,64,65,91,96,100,101,103,106,107,109,110,111,112,119,122,130,133,137,142,145,152,153,160,167,168,169,170,171,172,173,174,175];
+
+function engClass(e) {
+  if (e >= 7) return 'eng-high';
+  if (e >= 4.5) return 'eng-mid';
+  return 'eng-low';
+}
+
+const tbody = document.getElementById('tableBody');
+
+creators.forEach((c, i) => {
+  const tr = document.createElement('tr');
+  tr.style.animationDelay = `${0.25 + i * 0.035}s`;
+  tr.innerHTML = `
+    <td style="color:var(--text-secondary);font-size:12px;">${i+1}</td>
+    <td>
+      <div class="creator-name">${c.name}</div>
+      <div class="creator-handle">${c.handle}</div>
+    </td>
+    <td class="followers">${c.followers}</td>
+    <td><span class="engagement ${engClass(c.eng)}">${c.eng}%</span></td>
+    <td class="charges">${c.charges}</td>
+    <td><span class="niche-badge">${c.niche}</span></td>
+    <td>
+      <button class="btn-view" data-index="${i}">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <circle cx="5.5" cy="5.5" r="4" stroke="white" stroke-width="1.4"/>
+          <path d="M8.5 8.5L11.5 11.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
         </svg>
-        LUFFY<span>EDITS</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#hero" class="hoverable">Home</a></li>
-        <li><a href="#stats" class="hoverable">Bounty</a></li>
-        <li><a href="#portfolio" class="hoverable">Portfolio</a></li>
-        <li><a href="#services" class="hoverable">Gears</a></li>
-        <li><a href="#testimonials" class="hoverable">Crew</a></li>
-        <li><a href="#contact" class="hoverable">Contact</a></li>
-      </ul>
-      <div class="nav-right">
-        <button class="sound-toggle hoverable" id="sound-toggle" title="Toggle Music">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" id="sound-on-icon"></path>
-            <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" id="sound-off-icon" style="display:none;"></path>
-          </svg>
-        </button>
-        <a href="#contact" class="glow-btn hoverable">Get Quote</a>
-        <button class="menu-btn hoverable" id="menu-btn">&#9776;</button>
-      </div>
-    </div>
-  </header>
+        View
+      </button>
+    </td>
+  `;
+  tbody.appendChild(tr);
+});
+// Modal logic
+const overlay   = document.getElementById('overlay');
+const modal     = document.getElementById('modal');
+const modalImg  = document.getElementById('modalImg');
+const modalLabel= document.getElementById('modalLabel');
+const modalClose= document.getElementById('modalClose');
+const zoomHint  = document.getElementById('zoomHint');
+let zoomed = false;
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <div class="badge">
-            <span></span> Retention Specialist
-          </div>
-          <h1 class="hero-title">
-            I Edit Videos That <br>
-            <span>Generate Millions</span><br>
-            Of Views
-          </h1>
-          <p class="hero-description">
-            I help creators and brands unlock explosive growth. Blending high-octane pacing, cinematic sound design, and psychological hook strategy to keep viewers glued to the screen.
-          </p>
-          <div class="hero-actions">
-            <a href="#portfolio" class="glow-btn hoverable">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-              View My Work
-            </a>
-            <a href="#contact" class="outline-btn hoverable">Free Consultation</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-glow-ring"></div>
-          <div class="hero-image-wrapper glass-panel">
-            <img src="assets/luffy_hero.png" alt="Luffy Video Editor Silhouette" class="hero-image">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+function openModal(idx) {
+  const c = creators[idx];
+  const seed = imgSeeds[idx % imgSeeds.length];
+  modalImg.src = `https://picsum.photos/seed/${seed}/840/560`;
+  modalLabel.innerHTML = `${c.name} <span>· ${c.niche} · Media Kit</span>`;
+  overlay.classList.add('open');
+  zoomed = false;
+  modal.classList.remove('zoomed');
+  zoomHint.textContent = 'Click to zoom';
+  document.body.style.overflow = 'hidden';
+}
 
-  <!-- Bounty Board (Stats Dashboard) -->
-  <section class="stats-section" id="stats">
-    <div class="container">
-      <div class="section-title">
-        <span>The Stats Dashboard</span>
-        The Editor Bounty
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card glass-panel">
-          <div class="stat-icon">📈</div>
-          <div class="stat-number" data-target="72">0</div>
-          <div class="stat-label">Total Views</div>
-          <div class="stat-desc">Generated across client channels</div>
-        </div>
-        <div class="stat-card glass-panel">
-          <div class="stat-icon">🔥</div>
-          <div class="stat-number" data-target="74">0</div>
-          <div class="stat-label">Avg Retention</div>
-          <div class="stat-desc">Keep viewers hooked past 30s</div>
-        </div>
-        <div class="stat-card glass-panel">
-          <div class="stat-icon">👑</div>
-          <div class="stat-number" data-target="1.4">0</div>
-          <div class="stat-label">Subscribers Gained</div>
-          <div class="stat-desc">Organic growth driven by editing</div>
-        </div>
-        <div class="stat-card glass-panel">
-          <div class="stat-icon">⚡</div>
-          <div class="stat-number" data-target="380">0</div>
-          <div class="stat-label">Projects Completed</div>
-          <div class="stat-desc">High-production values delivered</div>
-        </div>
-      </div>
-    </div>
-  </section>
+function closeModal() {
+  overlay.classList.remove('open');
+  zoomed = false;
+  modal.classList.remove('zoomed');
+  document.body.style.overflow = '';
+}
 
-  <!-- Portfolio Section -->
-  <section class="portfolio" id="portfolio">
-    <div class="container">
-      <div class="section-title">
-        <span>Selected Works</span>
-        Viral Masterpieces
-      </div>
+// Button clicks
+tbody.addEventListener('click', e => {
+  const btn = e.target.closest('.btn-view');
+  if (btn) openModal(parseInt(btn.dataset.index));
+});
 
-      <div class="portfolio-filters">
-        <button class="filter-btn active hoverable" data-filter="all">All Projects</button>
-        <button class="filter-btn hoverable" data-filter="shorts">Shorts & Reels</button>
-        <button class="filter-btn hoverable" data-filter="youtube">YouTube Longform</button>
-        <button class="filter-btn hoverable" data-filter="anime">Anime & VFX</button>
-        <button class="filter-btn hoverable" data-filter="commercial">Commercials</button>
-      </div>
+// Zoom toggle on image click
+modal.addEventListener('click', e => {
+  if (e.target === modalClose || modalClose.contains(e.target)) return;
+  zoomed = !zoomed;
+  modal.classList.toggle('zoomed', zoomed);
+  zoomHint.textContent = zoomed ? 'Click to zoom out' : 'Click to zoom';
+});
 
-      <div class="portfolio-grid">
-        <!-- Item 1: Anime -->
-        <div class="portfolio-item glass-panel hoverable" data-category="anime" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/anime_edit_thumb.png" alt="Anime Edit Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">Anime & VFX</div>
-              <h3 class="item-title">Gear 5 Awakening - Cinematic Edit</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>5.4M</span></div>
-                <div class="metric-pill">Engagement: <span>+240%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
+// Close button
+modalClose.addEventListener('click', e => {
+  e.stopPropagation();
+  closeModal();
+});
 
-        <!-- Item 2: Commercial -->
-        <div class="portfolio-item glass-panel hoverable" data-category="commercial" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/commercial_thumb.png" alt="Commercial Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">Commercial</div>
-              <h3 class="item-title">Razer Core X - Tech Commercial</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">CTR: <span>8.7%</span></div>
-                <div class="metric-pill">Views: <span>1.2M</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
+// Click outside modal to close
+overlay.addEventListener('click', e => {
+  if (e.target === overlay) closeModal();
+});
 
-        <!-- Item 3: YouTube -->
-        <div class="portfolio-item glass-panel hoverable" data-category="youtube" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/vlog_gaming_thumb.png" alt="YouTube Vlog Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">YouTube Longform</div>
-              <h3 class="item-title">I Survived 100 Days in Minecraft Hardcore</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>12.8M</span></div>
-                <div class="metric-pill">Retention: <span>74%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 4: Shorts -->
-        <div class="portfolio-item glass-panel hoverable" data-category="shorts" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/anime_edit_thumb.png" alt="Shorts 1 Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">Shorts & Reels</div>
-              <h3 class="item-title">Psychology of MrBeast Hook Strategy</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>4.1M</span></div>
-                <div class="metric-pill">Shares: <span>+88k</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 5: YouTube 2 -->
-        <div class="portfolio-item glass-panel hoverable" data-category="youtube" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/vlog_gaming_thumb.png" alt="YouTube Vlog 2 Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">YouTube Longform</div>
-              <h3 class="item-title">We Bought The Cheapest Supercar</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>3.9M</span></div>
-                <div class="metric-pill">Retention: <span>68%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 6: Shorts 2 -->
-        <div class="portfolio-item glass-panel hoverable" data-category="shorts" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/commercial_thumb.png" alt="Shorts 2 Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">Shorts & Reels</div>
-              <h3 class="item-title">How Gear 5 Broke The Internet</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>8.2M</span></div>
-                <div class="metric-pill">Likes: <span>950k</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services (Gears) -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-title">
-        <span>Pricing & Packages</span>
-        Choose Your Gear
-      </div>
-
-      <div class="services-grid">
-        <!-- Gear 2: Shorts package -->
-        <div class="service-card glass-panel hoverable">
-          <div class="service-header">
-            <div class="service-gear">Gear 2</div>
-            <h3 class="service-name">Short-Form Domination</h3>
-            <div class="service-price">$450<span>/mo</span></div>
-          </div>
-          <ul class="service-features">
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              10x Reels / TikToks / Shorts
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Dynamic captions & color grading
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Retention-focused hook optimization
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Sound design & SFX mix
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              48-hour delivery time
-            </li>
-          </ul>
-          <a href="#contact" class="outline-btn service-btn hoverable" data-package="Gear 2 - Short-Form Domination">Deploy Gear 2</a>
-        </div>
-
-        <!-- Gear 3: YouTube Packages (Popular) -->
-        <div class="service-card glass-panel popular hoverable">
-          <div class="popular-badge">Most Popular</div>
-          <div class="service-header">
-            <div class="service-gear">Gear 3</div>
-            <h3 class="service-name">YouTube Growth Pack</h3>
-            <div class="service-price">$1,200<span>/mo</span></div>
-          </div>
-          <ul class="service-features">
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              4x Longform Videos (Up to 15 mins)
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Advanced storytelling & pacing
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Custom 2D graphics & typography
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Full audio mastering & dynamic SFX
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Free YouTube thumbnail variations
-            </li>
-          </ul>
-          <a href="#contact" class="glow-btn service-btn hoverable" data-package="Gear 3 - YouTube Growth Pack">Deploy Gear 3</a>
-        </div>
-
-        <!-- Gear 4: Elite VFX / Commercials -->
-        <div class="service-card glass-panel hoverable">
-          <div class="service-header">
-            <div class="service-gear">Gear 4</div>
-            <h3 class="service-name">Cinematic & VFX Elite</h3>
-            <div class="service-price">$2,500<span>/mo</span></div>
-          </div>
-          <ul class="service-features">
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Unlimited visual editing & assets
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              High-end cinematic color grading
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Complex 3D tracking & VFX elements
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Custom soundscaping & licensing
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Dedicated Discord queue access
-            </li>
-          </ul>
-          <a href="#contact" class="outline-btn service-btn hoverable" data-package="Gear 4 - Cinematic & VFX Elite">Deploy Gear 4</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials (Crew) -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="section-title">
-        <span>Happy Clients</span>
-        The Crew
-      </div>
-
-      <div class="testimonials-slider">
-        <div class="testimonial-container">
-          <div class="testimonial-wrapper" id="testimonial-wrapper">
-            <!-- Slide 1 -->
-            <div class="testimonial-card">
-              <div class="client-avatar-wrapper">
-                <img src="assets/commercial_thumb.png" alt="Zoro Edits" class="client-avatar">
-              </div>
-              <p class="testimonial-quote">
-                "Working with Luffy literally saved our channel. The pacing is insanely professional, and the retention graph skyrocketed immediately. Our average view count jumped from 200k to over 1.5M per video!"
-              </p>
-              <div class="client-info">
-                <h4 class="client-name">Zoro Roronoa</h4>
-                <div class="client-title">Founder, Three-Sword Media</div>
-              </div>
-              <div class="client-metrics-bar">
-                <div class="client-metric">Views: <span>+450%</span></div>
-                <div class="client-metric">Retention: <span>76% Avg</span></div>
-              </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="testimonial-card">
-              <div class="client-avatar-wrapper">
-                <img src="assets/anime_edit_thumb.png" alt="Nami Navigator" class="client-avatar">
-              </div>
-              <p class="testimonial-quote">
-                "Luffy's editing team is incredibly fast and highly communicative. The sound design is top-tier; they manage to find the perfect cinematic tracks and sync them to transitions flawlessly. Absolute game changers."
-              </p>
-              <div class="client-info">
-                <h4 class="client-name">Nami Orange</h4>
-                <div class="client-title">Creative Director, Grand Line Vlogs</div>
-              </div>
-              <div class="client-metrics-bar">
-                <div class="client-metric">CTR: <span>+12.4%</span></div>
-                <div class="client-metric">Subscribers: <span>+250k</span></div>
-              </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="testimonial-card">
-              <div class="client-avatar-wrapper">
-                <img src="assets/vlog_gaming_thumb.png" alt="Sanji Vinsmoke" class="client-avatar">
-              </div>
-              <p class="testimonial-quote">
-                "Simply the best video editor in the game. They edit high-octane food-vlogging and kitchen reviews for my restaurant brand. The pacing makes every dish feel like a Hollywood masterpiece. Highly recommended!"
-              </p>
-              <div class="client-info">
-                <h4 class="client-name">Sanji Vinsmoke</h4>
-                <div class="client-title">CEO, Baratie Kitchens</div>
-              </div>
-              <div class="client-metrics-bar">
-                <div class="client-metric">Conversions: <span>+180%</span></div>
-                <div class="client-metric">Views Generated: <span>14M+</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="slider-controls">
-          <button class="slider-btn hoverable" id="prev-slide" aria-label="Previous Slide">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-          </button>
-          <button class="slider-btn hoverable" id="next-slide" aria-label="Next Slide">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section (Bounty Claim) -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <div class="contact-tag">Get in Touch</div>
-          <h2 class="contact-title">Claim Your <br>Growth Bounty</h2>
-          <p class="hero-description">
-            Ready to blow up your channels? Send over your project briefs, target viewer count, or choose a pre-designed Gear package below. Let's conquer the algorithm together.
-          </p>
-          <div class="contact-channels">
-            <a href="mailto:luffy@edits.com" class="channel-card glass-panel hoverable">
-              <div class="channel-icon">✉</div>
-              <div class="channel-text">
-                <h4>Email Inbox</h4>
-                <p>luffy@edits.com</p>
-              </div>
-            </a>
-            <div class="channel-card glass-panel">
-              <div class="channel-icon">📍</div>
-              <div class="channel-text">
-                <h4>Operation Base</h4>
-                <p>Thousand Sunny, Grand Line</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-form-panel glass-panel">
-          <form id="bounty-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" class="form-control" placeholder="e.g. Monkey D. Luffy" required>
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" class="form-control" placeholder="luffy@grandline.com" required>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="channel">Channel / Brand Link</label>
-                <input type="url" id="channel" class="form-control" placeholder="youtube.com/@channel" required>
-              </div>
-              <div class="form-group">
-                <label for="package">Choose Gear (Package)</label>
-                <select id="package" class="form-control">
-                  <option value="none">Custom Project Scope</option>
-                  <option value="Gear 2 - Short-Form Domination">Gear 2: Shorts Package ($450/mo)</option>
-                  <option value="Gear 3 - YouTube Growth Pack">Gear 3: YouTube Growth Pack ($1200/mo)</option>
-                  <option value="Gear 4 - Cinematic & VFX Elite">Gear 4: VFX & Cinematic ($2500/mo)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="slider-container">
-                <div class="slider-val-wrap">
-                  <label>Monthly Budget Limit</label>
-                  <span class="slider-val" id="budget-value">$1,500</span>
-                </div>
-                <input type="range" id="budget" min="300" max="5000" step="100" value="1500" class="form-control">
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 2.5rem;">
-              <label for="message">Project Vision Details</label>
-              <textarea id="message" class="form-control" placeholder="Describe the flow, pacing, inspiration channels (e.g. MrBeast, MagnatesMedia, anime style)..." required></textarea>
-            </div>
-
-            <button type="submit" class="glow-btn submit-btn hoverable">
-              <span>Send Project Inquiry</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
-              </svg>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-info">
-          <a href="#" class="logo hoverable" style="margin-bottom:1.5rem;">
-            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M2 12h20M12 2v20"></path>
-            </svg>
-            LUFFY<span>EDITS</span>
-          </a>
-          <p>Cutting-edge, high-retention video edits designed to break algorithms and drive massive audience conversion rates.</p>
-        </div>
-        <div class="footer-links">
-          <h4>Navigation</h4>
-          <ul>
-            <li><a href="#hero" class="hoverable">Home</a></li>
-            <li><a href="#stats" class="hoverable">Bounty Board</a></li>
-            <li><a href="#portfolio" class="hoverable">Video Reel</a></li>
-            <li><a href="#services" class="hoverable">Gear Levels</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Legal & Operations</h4>
-          <ul>
-            <li><a href="#contact" class="hoverable">Consultations</a></li>
-            <li><a href="#" class="hoverable">Terms of Bounty</a></li>
-            <li><a href="#" class="hoverable">Privacy Compass</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>
-          &copy; 2026 LUFFY EDITS. All rights reserved. Created in the Grand Line.
-        </div>
-        <div class="social-icons">
-          <a href="#" class="social-icon hoverable" aria-label="YouTube">YT</a>
-          <a href="#" class="social-icon hoverable" aria-label="Twitter">TW</a>
-          <a href="#" class="social-icon hoverable" aria-label="Instagram">IG</a>
-          <a href="#" class="social-icon hoverable" aria-label="Discord">DC</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Lightbox Modal Player -->
-  <div class="lightbox" id="lightbox">
-    <div class="lightbox-content">
-      <button class="lightbox-close hoverable" id="lightbox-close">Close ✕</button>
-      <div class="lightbox-media" id="lightbox-media">
-        <!-- Video iframe will be dynamically injected here -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Notification Container -->
-  <div class="toast-container" id="toast-container">
-    <div class="toast" id="submit-toast">
-      <div class="toast-icon">✓</div>
-      <div>
-        <div class="toast-title">Bounty Claimed!</div>
-        <div class="toast-message">Your project details were transmitted. Expect a dispatch within 24h.</div>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+// ESC key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
 </body>
 </html>
