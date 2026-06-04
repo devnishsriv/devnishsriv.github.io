@@ -1,610 +1,1071 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Premium video editor portfolio. Specializing in high-retention edits, viral shorts, cinematic sound design, and YouTube pacing. Luffy-themed design system.">
-  <title>LUFFY | High-Conversion Video Editor & Visual Storyteller</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Premium video editor portfolio. Specializing in high-retention edits, viral shorts, cinematic sound design, and YouTube pacing. Luffy-themed design system."
+        />
+        <title>LUFFY | High-Conversion Video Editor & Visual Storyteller</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <!-- Particle Background Canvas -->
+        <canvas id="particle-canvas"></canvas>
 
-  <!-- Particle Background Canvas -->
-  <canvas id="particle-canvas"></canvas>
+        <!-- Custom Cursor Follower -->
+        <div class="cursor-dot" id="cursor-dot"></div>
+        <div class="cursor-outline" id="cursor-outline"></div>
 
-  <!-- Custom Cursor Follower -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-outline" id="cursor-outline"></div>
-
-  <!-- Header Navigation -->
-  <header id="header">
-    <div class="container">
-      <a href="#" class="logo hoverable">
-        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M2 12h20M12 2v20"></path>
-        </svg>
-        LUFFY<span>EDITS</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#hero" class="hoverable">Home</a></li>
-        <li><a href="#stats" class="hoverable">Bounty</a></li>
-        <li><a href="#portfolio" class="hoverable">Portfolio</a></li>
-        <li><a href="#services" class="hoverable">Gears</a></li>
-        <li><a href="#testimonials" class="hoverable">Crew</a></li>
-        <li><a href="#contact" class="hoverable">Contact</a></li>
-      </ul>
-      <div class="nav-right">
-        <button class="sound-toggle hoverable" id="sound-toggle" title="Toggle Music">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" id="sound-on-icon"></path>
-            <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" id="sound-off-icon" style="display:none;"></path>
-          </svg>
-        </button>
-        <a href="#contact" class="glow-btn hoverable">Get Quote</a>
-        <button class="menu-btn hoverable" id="menu-btn">&#9776;</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <div class="badge">
-            <span></span> Retention Specialist
-          </div>
-          <h1 class="hero-title">
-            I Edit Videos That <br>
-            <span>Generate Millions</span><br>
-            Of Views
-          </h1>
-          <p class="hero-description">
-            I help creators and brands unlock explosive growth. Blending high-octane pacing, cinematic sound design, and psychological hook strategy to keep viewers glued to the screen.
-          </p>
-          <div class="hero-actions">
-            <a href="#portfolio" class="glow-btn hoverable">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-              View My Work
-            </a>
-            <a href="#contact" class="outline-btn hoverable">Free Consultation</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-glow-ring"></div>
-          <div class="hero-image-wrapper glass-panel">
-            <img src="file:///C:/Users/Nishant/OneDrive/DnshFx/assets/luffy_hero.png" alt="Luffy Video Editor Silhouette" class="hero-image">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bounty Board (Stats Dashboard) -->
-  <section class="stats-section" id="stats">
-    <div class="container">
-      <div class="section-title">
-        <span>The Stats Dashboard</span>
-        The Editor Bounty
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card glass-panel">
-          <div class="stat-icon">📈</div>
-          <div class="stat-number" data-target="72">0</div>
-          <div class="stat-label">Total Views</div>
-          <div class="stat-desc">Generated across client channels</div>
-        </div>
-        <div class="stat-card glass-panel">
-          <div class="stat-icon">🔥</div>
-          <div class="stat-number" data-target="74">0</div>
-          <div class="stat-label">Avg Retention</div>
-          <div class="stat-desc">Keep viewers hooked past 30s</div>
-        </div>
-        <div class="stat-card glass-panel">
-          <div class="stat-icon">👑</div>
-          <div class="stat-number" data-target="1.4">0</div>
-          <div class="stat-label">Subscribers Gained</div>
-          <div class="stat-desc">Organic growth driven by editing</div>
-        </div>
-        <div class="stat-card glass-panel">
-          <div class="stat-icon">⚡</div>
-          <div class="stat-number" data-target="380">0</div>
-          <div class="stat-label">Projects Completed</div>
-          <div class="stat-desc">High-production values delivered</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Section -->
-  <section class="portfolio" id="portfolio">
-    <div class="container">
-      <div class="section-title">
-        <span>Selected Works</span>
-        Viral Masterpieces
-      </div>
-
-      <div class="portfolio-filters">
-        <button class="filter-btn active hoverable" data-filter="all">All Projects</button>
-        <button class="filter-btn hoverable" data-filter="shorts">Shorts & Reels</button>
-        <button class="filter-btn hoverable" data-filter="youtube">YouTube Longform</button>
-        <button class="filter-btn hoverable" data-filter="anime">Anime & VFX</button>
-        <button class="filter-btn hoverable" data-filter="commercial">Commercials</button>
-      </div>
-
-      <div class="portfolio-grid">
-        <!-- Item 1: Anime -->
-        <div class="portfolio-item glass-panel hoverable" data-category="anime" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/anime_edit_thumb.png" alt="Anime Edit Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">Anime & VFX</div>
-              <h3 class="item-title">Gear 5 Awakening - Cinematic Edit</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>5.4M</span></div>
-                <div class="metric-pill">Engagement: <span>+240%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 2: Commercial -->
-        <div class="portfolio-item glass-panel hoverable" data-category="commercial" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/commercial_thumb.png" alt="Commercial Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">Commercial</div>
-              <h3 class="item-title">Razer Core X - Tech Commercial</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">CTR: <span>8.7%</span></div>
-                <div class="metric-pill">Views: <span>1.2M</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 3: YouTube -->
-        <div class="portfolio-item glass-panel hoverable" data-category="youtube" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/vlog_gaming_thumb.png" alt="YouTube Vlog Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">YouTube Longform</div>
-              <h3 class="item-title">I Survived 100 Days in Minecraft Hardcore</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>12.8M</span></div>
-                <div class="metric-pill">Retention: <span>74%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 4: Shorts -->
-        <div class="portfolio-item glass-panel hoverable" data-category="shorts" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/anime_edit_thumb.png" alt="Shorts 1 Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">Shorts & Reels</div>
-              <h3 class="item-title">Psychology of MrBeast Hook Strategy</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>4.1M</span></div>
-                <div class="metric-pill">Shares: <span>+88k</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 5: YouTube 2 -->
-        <div class="portfolio-item glass-panel hoverable" data-category="youtube" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/vlog_gaming_thumb.png" alt="YouTube Vlog 2 Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">YouTube Longform</div>
-              <h3 class="item-title">We Bought The Cheapest Supercar</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>3.9M</span></div>
-                <div class="metric-pill">Retention: <span>68%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 6: Shorts 2 -->
-        <div class="portfolio-item glass-panel hoverable" data-category="shorts" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-          <img src="assets/commercial_thumb.png" alt="Shorts 2 Portfolio Thumbnail" class="portfolio-thumbnail">
-          <div class="portfolio-overlay">
-            <div class="play-icon-wrap">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="item-category">Shorts & Reels</div>
-              <h3 class="item-title">How Gear 5 Broke The Internet</h3>
-              <div class="item-metrics">
-                <div class="metric-pill">Views: <span>8.2M</span></div>
-                <div class="metric-pill">Likes: <span>950k</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services (Gears) -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-title">
-        <span>Pricing & Packages</span>
-        Choose Your Gear
-      </div>
-
-      <div class="services-grid">
-        <!-- Gear 2: Shorts package -->
-        <div class="service-card glass-panel hoverable">
-          <div class="service-header">
-            <div class="service-gear">Gear 2</div>
-            <h3 class="service-name">Short-Form Domination</h3>
-            <div class="service-price">$450<span>/mo</span></div>
-          </div>
-          <ul class="service-features">
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              10x Reels / TikToks / Shorts
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Dynamic captions & color grading
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Retention-focused hook optimization
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Sound design & SFX mix
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              48-hour delivery time
-            </li>
-          </ul>
-          <a href="#contact" class="outline-btn service-btn hoverable" data-package="Gear 2 - Short-Form Domination">Deploy Gear 2</a>
-        </div>
-
-        <!-- Gear 3: YouTube Packages (Popular) -->
-        <div class="service-card glass-panel popular hoverable">
-          <div class="popular-badge">Most Popular</div>
-          <div class="service-header">
-            <div class="service-gear">Gear 3</div>
-            <h3 class="service-name">YouTube Growth Pack</h3>
-            <div class="service-price">$1,200<span>/mo</span></div>
-          </div>
-          <ul class="service-features">
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              4x Longform Videos (Up to 15 mins)
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Advanced storytelling & pacing
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Custom 2D graphics & typography
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Full audio mastering & dynamic SFX
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Free YouTube thumbnail variations
-            </li>
-          </ul>
-          <a href="#contact" class="glow-btn service-btn hoverable" data-package="Gear 3 - YouTube Growth Pack">Deploy Gear 3</a>
-        </div>
-
-        <!-- Gear 4: Elite VFX / Commercials -->
-        <div class="service-card glass-panel hoverable">
-          <div class="service-header">
-            <div class="service-gear">Gear 4</div>
-            <h3 class="service-name">Cinematic & VFX Elite</h3>
-            <div class="service-price">$2,500<span>/mo</span></div>
-          </div>
-          <ul class="service-features">
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Unlimited visual editing & assets
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              High-end cinematic color grading
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Complex 3D tracking & VFX elements
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Custom soundscaping & licensing
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Dedicated Discord queue access
-            </li>
-          </ul>
-          <a href="#contact" class="outline-btn service-btn hoverable" data-package="Gear 4 - Cinematic & VFX Elite">Deploy Gear 4</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials (Crew) -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="section-title">
-        <span>Happy Clients</span>
-        The Crew
-      </div>
-
-      <div class="testimonials-slider">
-        <div class="testimonial-container">
-          <div class="testimonial-wrapper" id="testimonial-wrapper">
-            <!-- Slide 1 -->
-            <div class="testimonial-card">
-              <div class="client-avatar-wrapper">
-                <img src="assets/commercial_thumb.png" alt="Zoro Edits" class="client-avatar">
-              </div>
-              <p class="testimonial-quote">
-                "Working with Luffy literally saved our channel. The pacing is insanely professional, and the retention graph skyrocketed immediately. Our average view count jumped from 200k to over 1.5M per video!"
-              </p>
-              <div class="client-info">
-                <h4 class="client-name">Zoro Roronoa</h4>
-                <div class="client-title">Founder, Three-Sword Media</div>
-              </div>
-              <div class="client-metrics-bar">
-                <div class="client-metric">Views: <span>+450%</span></div>
-                <div class="client-metric">Retention: <span>76% Avg</span></div>
-              </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="testimonial-card">
-              <div class="client-avatar-wrapper">
-                <img src="assets/anime_edit_thumb.png" alt="Nami Navigator" class="client-avatar">
-              </div>
-              <p class="testimonial-quote">
-                "Luffy's editing team is incredibly fast and highly communicative. The sound design is top-tier; they manage to find the perfect cinematic tracks and sync them to transitions flawlessly. Absolute game changers."
-              </p>
-              <div class="client-info">
-                <h4 class="client-name">Nami Orange</h4>
-                <div class="client-title">Creative Director, Grand Line Vlogs</div>
-              </div>
-              <div class="client-metrics-bar">
-                <div class="client-metric">CTR: <span>+12.4%</span></div>
-                <div class="client-metric">Subscribers: <span>+250k</span></div>
-              </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="testimonial-card">
-              <div class="client-avatar-wrapper">
-                <img src="assets/vlog_gaming_thumb.png" alt="Sanji Vinsmoke" class="client-avatar">
-              </div>
-              <p class="testimonial-quote">
-                "Simply the best video editor in the game. They edit high-octane food-vlogging and kitchen reviews for my restaurant brand. The pacing makes every dish feel like a Hollywood masterpiece. Highly recommended!"
-              </p>
-              <div class="client-info">
-                <h4 class="client-name">Sanji Vinsmoke</h4>
-                <div class="client-title">CEO, Baratie Kitchens</div>
-              </div>
-              <div class="client-metrics-bar">
-                <div class="client-metric">Conversions: <span>+180%</span></div>
-                <div class="client-metric">Views Generated: <span>14M+</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="slider-controls">
-          <button class="slider-btn hoverable" id="prev-slide" aria-label="Previous Slide">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-          </button>
-          <button class="slider-btn hoverable" id="next-slide" aria-label="Next Slide">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section (Bounty Claim) -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <div class="contact-tag">Get in Touch</div>
-          <h2 class="contact-title">Claim Your <br>Growth Bounty</h2>
-          <p class="hero-description">
-            Ready to blow up your channels? Send over your project briefs, target viewer count, or choose a pre-designed Gear package below. Let's conquer the algorithm together.
-          </p>
-          <div class="contact-channels">
-            <a href="mailto:luffy@edits.com" class="channel-card glass-panel hoverable">
-              <div class="channel-icon">✉</div>
-              <div class="channel-text">
-                <h4>Email Inbox</h4>
-                <p>luffy@edits.com</p>
-              </div>
-            </a>
-            <div class="channel-card glass-panel">
-              <div class="channel-icon">📍</div>
-              <div class="channel-text">
-                <h4>Operation Base</h4>
-                <p>Thousand Sunny, Grand Line</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact-form-panel glass-panel">
-          <form id="bounty-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" class="form-control" placeholder="e.g. Monkey D. Luffy" required>
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" class="form-control" placeholder="luffy@grandline.com" required>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="channel">Channel / Brand Link</label>
-                <input type="url" id="channel" class="form-control" placeholder="youtube.com/@channel" required>
-              </div>
-              <div class="form-group">
-                <label for="package">Choose Gear (Package)</label>
-                <select id="package" class="form-control">
-                  <option value="none">Custom Project Scope</option>
-                  <option value="Gear 2 - Short-Form Domination">Gear 2: Shorts Package ($450/mo)</option>
-                  <option value="Gear 3 - YouTube Growth Pack">Gear 3: YouTube Growth Pack ($1200/mo)</option>
-                  <option value="Gear 4 - Cinematic & VFX Elite">Gear 4: VFX & Cinematic ($2500/mo)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="slider-container">
-                <div class="slider-val-wrap">
-                  <label>Monthly Budget Limit</label>
-                  <span class="slider-val" id="budget-value">$1,500</span>
+        <!-- Header Navigation -->
+        <header id="header">
+            <div class="container">
+                <a href="#" class="logo hoverable">
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="30"
+                        height="30"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path
+                            d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M2 12h20M12 2v20"
+                        ></path>
+                    </svg>
+                    LUFFY<span>EDITS</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#hero" class="hoverable">Home</a></li>
+                    <li><a href="#stats" class="hoverable">Bounty</a></li>
+                    <li>
+                        <a href="#portfolio" class="hoverable">Portfolio</a>
+                    </li>
+                    <li><a href="#services" class="hoverable">Gears</a></li>
+                    <li><a href="#testimonials" class="hoverable">Crew</a></li>
+                    <li><a href="#contact" class="hoverable">Contact</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button
+                        class="sound-toggle hoverable"
+                        id="sound-toggle"
+                        title="Toggle Music"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"
+                                id="sound-on-icon"
+                            ></path>
+                            <path
+                                d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6"
+                                id="sound-off-icon"
+                                style="display: none"
+                            ></path>
+                        </svg>
+                    </button>
+                    <a href="#contact" class="glow-btn hoverable">Get Quote</a>
+                    <button class="menu-btn hoverable" id="menu-btn">
+                        &#9776;
+                    </button>
                 </div>
-                <input type="range" id="budget" min="300" max="5000" step="100" value="1500" class="form-control">
-              </div>
             </div>
+        </header>
 
-            <div class="form-group" style="margin-bottom: 2.5rem;">
-              <label for="message">Project Vision Details</label>
-              <textarea id="message" class="form-control" placeholder="Describe the flow, pacing, inspiration channels (e.g. MrBeast, MagnatesMedia, anime style)..." required></textarea>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <div class="badge">
+                            <span></span> Retention Specialist
+                        </div>
+                        <h1 class="hero-title">
+                            I Edit Videos That <br />
+                            <span>Generate Millions</span><br />
+                            Of Views
+                        </h1>
+                        <p class="hero-description">
+                            I help creators and brands unlock explosive growth.
+                            Blending high-octane pacing, cinematic sound design,
+                            and psychological hook strategy to keep viewers
+                            glued to the screen.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#portfolio" class="glow-btn hoverable">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                >
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                                View My Work
+                            </a>
+                            <a href="#contact" class="outline-btn hoverable"
+                                >Free Consultation</a
+                            >
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="hero-glow-ring"></div>
+                        <div class="hero-image-wrapper glass-panel">
+                            <img
+                                src="./assets/luffy_hero.png"
+                                alt="Luffy Video Editor Silhouette"
+                                class="hero-image"
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <button type="submit" class="glow-btn submit-btn hoverable">
-              <span>Send Project Inquiry</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
-              </svg>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- Bounty Board (Stats Dashboard) -->
+        <section class="stats-section" id="stats">
+            <div class="container">
+                <div class="section-title">
+                    <span>The Stats Dashboard</span>
+                    The Editor Bounty
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-number" data-target="72">0</div>
+                        <div class="stat-label">Total Views</div>
+                        <div class="stat-desc">
+                            Generated across client channels
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-number" data-target="74">0</div>
+                        <div class="stat-label">Avg Retention</div>
+                        <div class="stat-desc">
+                            Keep viewers hooked past 30s
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon">👑</div>
+                        <div class="stat-number" data-target="1.4">0</div>
+                        <div class="stat-label">Subscribers Gained</div>
+                        <div class="stat-desc">
+                            Organic growth driven by editing
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-number" data-target="380">0</div>
+                        <div class="stat-label">Projects Completed</div>
+                        <div class="stat-desc">
+                            High-production values delivered
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-info">
-          <a href="#" class="logo hoverable" style="margin-bottom:1.5rem;">
-            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M2 12h20M12 2v20"></path>
-            </svg>
-            LUFFY<span>EDITS</span>
-          </a>
-          <p>Cutting-edge, high-retention video edits designed to break algorithms and drive massive audience conversion rates.</p>
-        </div>
-        <div class="footer-links">
-          <h4>Navigation</h4>
-          <ul>
-            <li><a href="#hero" class="hoverable">Home</a></li>
-            <li><a href="#stats" class="hoverable">Bounty Board</a></li>
-            <li><a href="#portfolio" class="hoverable">Video Reel</a></li>
-            <li><a href="#services" class="hoverable">Gear Levels</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Legal & Operations</h4>
-          <ul>
-            <li><a href="#contact" class="hoverable">Consultations</a></li>
-            <li><a href="#" class="hoverable">Terms of Bounty</a></li>
-            <li><a href="#" class="hoverable">Privacy Compass</a></li>
-          </ul>
-        </div>
-      </div>
+        <!-- Portfolio Section -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <div class="section-title">
+                    <span>Selected Works</span>
+                    Viral Masterpieces
+                </div>
 
-      <div class="footer-bottom">
-        <div>
-          &copy; 2026 LUFFY EDITS. All rights reserved. Created in the Grand Line.
+                <div class="portfolio-filters">
+                    <button
+                        class="filter-btn active hoverable"
+                        data-filter="all"
+                    >
+                        All Projects
+                    </button>
+                    <button class="filter-btn hoverable" data-filter="shorts">
+                        Shorts & Reels
+                    </button>
+                    <button class="filter-btn hoverable" data-filter="youtube">
+                        YouTube Longform
+                    </button>
+                    <button class="filter-btn hoverable" data-filter="anime">
+                        Anime & VFX
+                    </button>
+                    <button
+                        class="filter-btn hoverable"
+                        data-filter="commercial"
+                    >
+                        Commercials
+                    </button>
+                </div>
+
+                <div class="portfolio-grid">
+                    <!-- Item 1: Anime -->
+                    <div
+                        class="portfolio-item glass-panel hoverable"
+                        data-category="anime"
+                        data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    >
+                        <img
+                            src="assets/anime_edit_thumb.png"
+                            alt="Anime Edit Portfolio Thumbnail"
+                            class="portfolio-thumbnail"
+                        />
+                        <div class="portfolio-overlay">
+                            <div class="play-icon-wrap">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="item-category">Anime & VFX</div>
+                                <h3 class="item-title">
+                                    Gear 5 Awakening - Cinematic Edit
+                                </h3>
+                                <div class="item-metrics">
+                                    <div class="metric-pill">
+                                        Views: <span>5.4M</span>
+                                    </div>
+                                    <div class="metric-pill">
+                                        Engagement: <span>+240%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Commercial -->
+                    <div
+                        class="portfolio-item glass-panel hoverable"
+                        data-category="commercial"
+                        data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    >
+                        <img
+                            src="assets/commercial_thumb.png"
+                            alt="Commercial Portfolio Thumbnail"
+                            class="portfolio-thumbnail"
+                        />
+                        <div class="portfolio-overlay">
+                            <div class="play-icon-wrap">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="item-category">Commercial</div>
+                                <h3 class="item-title">
+                                    Razer Core X - Tech Commercial
+                                </h3>
+                                <div class="item-metrics">
+                                    <div class="metric-pill">
+                                        CTR: <span>8.7%</span>
+                                    </div>
+                                    <div class="metric-pill">
+                                        Views: <span>1.2M</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: YouTube -->
+                    <div
+                        class="portfolio-item glass-panel hoverable"
+                        data-category="youtube"
+                        data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    >
+                        <img
+                            src="assets/vlog_gaming_thumb.png"
+                            alt="YouTube Vlog Portfolio Thumbnail"
+                            class="portfolio-thumbnail"
+                        />
+                        <div class="portfolio-overlay">
+                            <div class="play-icon-wrap">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="item-category">
+                                    YouTube Longform
+                                </div>
+                                <h3 class="item-title">
+                                    I Survived 100 Days in Minecraft Hardcore
+                                </h3>
+                                <div class="item-metrics">
+                                    <div class="metric-pill">
+                                        Views: <span>12.8M</span>
+                                    </div>
+                                    <div class="metric-pill">
+                                        Retention: <span>74%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Shorts -->
+                    <div
+                        class="portfolio-item glass-panel hoverable"
+                        data-category="shorts"
+                        data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    >
+                        <img
+                            src="assets/anime_edit_thumb.png"
+                            alt="Shorts 1 Portfolio Thumbnail"
+                            class="portfolio-thumbnail"
+                        />
+                        <div class="portfolio-overlay">
+                            <div class="play-icon-wrap">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="item-category">Shorts & Reels</div>
+                                <h3 class="item-title">
+                                    Psychology of MrBeast Hook Strategy
+                                </h3>
+                                <div class="item-metrics">
+                                    <div class="metric-pill">
+                                        Views: <span>4.1M</span>
+                                    </div>
+                                    <div class="metric-pill">
+                                        Shares: <span>+88k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: YouTube 2 -->
+                    <div
+                        class="portfolio-item glass-panel hoverable"
+                        data-category="youtube"
+                        data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    >
+                        <img
+                            src="assets/vlog_gaming_thumb.png"
+                            alt="YouTube Vlog 2 Portfolio Thumbnail"
+                            class="portfolio-thumbnail"
+                        />
+                        <div class="portfolio-overlay">
+                            <div class="play-icon-wrap">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="item-category">
+                                    YouTube Longform
+                                </div>
+                                <h3 class="item-title">
+                                    We Bought The Cheapest Supercar
+                                </h3>
+                                <div class="item-metrics">
+                                    <div class="metric-pill">
+                                        Views: <span>3.9M</span>
+                                    </div>
+                                    <div class="metric-pill">
+                                        Retention: <span>68%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6: Shorts 2 -->
+                    <div
+                        class="portfolio-item glass-panel hoverable"
+                        data-category="shorts"
+                        data-video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    >
+                        <img
+                            src="assets/commercial_thumb.png"
+                            alt="Shorts 2 Portfolio Thumbnail"
+                            class="portfolio-thumbnail"
+                        />
+                        <div class="portfolio-overlay">
+                            <div class="play-icon-wrap">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="item-category">Shorts & Reels</div>
+                                <h3 class="item-title">
+                                    How Gear 5 Broke The Internet
+                                </h3>
+                                <div class="item-metrics">
+                                    <div class="metric-pill">
+                                        Views: <span>8.2M</span>
+                                    </div>
+                                    <div class="metric-pill">
+                                        Likes: <span>950k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services (Gears) -->
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-title">
+                    <span>Pricing & Packages</span>
+                    Choose Your Gear
+                </div>
+
+                <div class="services-grid">
+                    <!-- Gear 2: Shorts package -->
+                    <div class="service-card glass-panel hoverable">
+                        <div class="service-header">
+                            <div class="service-gear">Gear 2</div>
+                            <h3 class="service-name">Short-Form Domination</h3>
+                            <div class="service-price">
+                                $450<span>/mo</span>
+                            </div>
+                        </div>
+                        <ul class="service-features">
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                10x Reels / TikToks / Shorts
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Dynamic captions & color grading
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Retention-focused hook optimization
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Sound design & SFX mix
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                48-hour delivery time
+                            </li>
+                        </ul>
+                        <a
+                            href="#contact"
+                            class="outline-btn service-btn hoverable"
+                            data-package="Gear 2 - Short-Form Domination"
+                            >Deploy Gear 2</a
+                        >
+                    </div>
+
+                    <!-- Gear 3: YouTube Packages (Popular) -->
+                    <div class="service-card glass-panel popular hoverable">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="service-header">
+                            <div class="service-gear">Gear 3</div>
+                            <h3 class="service-name">YouTube Growth Pack</h3>
+                            <div class="service-price">
+                                $1,200<span>/mo</span>
+                            </div>
+                        </div>
+                        <ul class="service-features">
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                4x Longform Videos (Up to 15 mins)
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Advanced storytelling & pacing
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Custom 2D graphics & typography
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Full audio mastering & dynamic SFX
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Free YouTube thumbnail variations
+                            </li>
+                        </ul>
+                        <a
+                            href="#contact"
+                            class="glow-btn service-btn hoverable"
+                            data-package="Gear 3 - YouTube Growth Pack"
+                            >Deploy Gear 3</a
+                        >
+                    </div>
+
+                    <!-- Gear 4: Elite VFX / Commercials -->
+                    <div class="service-card glass-panel hoverable">
+                        <div class="service-header">
+                            <div class="service-gear">Gear 4</div>
+                            <h3 class="service-name">Cinematic & VFX Elite</h3>
+                            <div class="service-price">
+                                $2,500<span>/mo</span>
+                            </div>
+                        </div>
+                        <ul class="service-features">
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Unlimited visual editing & assets
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                High-end cinematic color grading
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Complex 3D tracking & VFX elements
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Custom soundscaping & licensing
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                                Dedicated Discord queue access
+                            </li>
+                        </ul>
+                        <a
+                            href="#contact"
+                            class="outline-btn service-btn hoverable"
+                            data-package="Gear 4 - Cinematic & VFX Elite"
+                            >Deploy Gear 4</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials (Crew) -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <span>Happy Clients</span>
+                    The Crew
+                </div>
+
+                <div class="testimonials-slider">
+                    <div class="testimonial-container">
+                        <div
+                            class="testimonial-wrapper"
+                            id="testimonial-wrapper"
+                        >
+                            <!-- Slide 1 -->
+                            <div class="testimonial-card">
+                                <div class="client-avatar-wrapper">
+                                    <img
+                                        src="assets/commercial_thumb.png"
+                                        alt="Zoro Edits"
+                                        class="client-avatar"
+                                    />
+                                </div>
+                                <p class="testimonial-quote">
+                                    "Working with Luffy literally saved our
+                                    channel. The pacing is insanely
+                                    professional, and the retention graph
+                                    skyrocketed immediately. Our average view
+                                    count jumped from 200k to over 1.5M per
+                                    video!"
+                                </p>
+                                <div class="client-info">
+                                    <h4 class="client-name">Zoro Roronoa</h4>
+                                    <div class="client-title">
+                                        Founder, Three-Sword Media
+                                    </div>
+                                </div>
+                                <div class="client-metrics-bar">
+                                    <div class="client-metric">
+                                        Views: <span>+450%</span>
+                                    </div>
+                                    <div class="client-metric">
+                                        Retention: <span>76% Avg</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="testimonial-card">
+                                <div class="client-avatar-wrapper">
+                                    <img
+                                        src="assets/anime_edit_thumb.png"
+                                        alt="Nami Navigator"
+                                        class="client-avatar"
+                                    />
+                                </div>
+                                <p class="testimonial-quote">
+                                    "Luffy's editing team is incredibly fast and
+                                    highly communicative. The sound design is
+                                    top-tier; they manage to find the perfect
+                                    cinematic tracks and sync them to
+                                    transitions flawlessly. Absolute game
+                                    changers."
+                                </p>
+                                <div class="client-info">
+                                    <h4 class="client-name">Nami Orange</h4>
+                                    <div class="client-title">
+                                        Creative Director, Grand Line Vlogs
+                                    </div>
+                                </div>
+                                <div class="client-metrics-bar">
+                                    <div class="client-metric">
+                                        CTR: <span>+12.4%</span>
+                                    </div>
+                                    <div class="client-metric">
+                                        Subscribers: <span>+250k</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="testimonial-card">
+                                <div class="client-avatar-wrapper">
+                                    <img
+                                        src="assets/vlog_gaming_thumb.png"
+                                        alt="Sanji Vinsmoke"
+                                        class="client-avatar"
+                                    />
+                                </div>
+                                <p class="testimonial-quote">
+                                    "Simply the best video editor in the game.
+                                    They edit high-octane food-vlogging and
+                                    kitchen reviews for my restaurant brand. The
+                                    pacing makes every dish feel like a
+                                    Hollywood masterpiece. Highly recommended!"
+                                </p>
+                                <div class="client-info">
+                                    <h4 class="client-name">Sanji Vinsmoke</h4>
+                                    <div class="client-title">
+                                        CEO, Baratie Kitchens
+                                    </div>
+                                </div>
+                                <div class="client-metrics-bar">
+                                    <div class="client-metric">
+                                        Conversions: <span>+180%</span>
+                                    </div>
+                                    <div class="client-metric">
+                                        Views Generated: <span>14M+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slider-controls">
+                        <button
+                            class="slider-btn hoverable"
+                            id="prev-slide"
+                            aria-label="Previous Slide"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+                        <button
+                            class="slider-btn hoverable"
+                            id="next-slide"
+                            aria-label="Next Slide"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section (Bounty Claim) -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-tag">Get in Touch</div>
+                        <h2 class="contact-title">
+                            Claim Your <br />Growth Bounty
+                        </h2>
+                        <p class="hero-description">
+                            Ready to blow up your channels? Send over your
+                            project briefs, target viewer count, or choose a
+                            pre-designed Gear package below. Let's conquer the
+                            algorithm together.
+                        </p>
+                        <div class="contact-channels">
+                            <a
+                                href="mailto:luffy@edits.com"
+                                class="channel-card glass-panel hoverable"
+                            >
+                                <div class="channel-icon">✉</div>
+                                <div class="channel-text">
+                                    <h4>Email Inbox</h4>
+                                    <p>luffy@edits.com</p>
+                                </div>
+                            </a>
+                            <div class="channel-card glass-panel">
+                                <div class="channel-icon">📍</div>
+                                <div class="channel-text">
+                                    <h4>Operation Base</h4>
+                                    <p>Thousand Sunny, Grand Line</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-panel glass-panel">
+                        <form id="bounty-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        class="form-control"
+                                        placeholder="e.g. Monkey D. Luffy"
+                                        required
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        class="form-control"
+                                        placeholder="luffy@grandline.com"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="channel"
+                                        >Channel / Brand Link</label
+                                    >
+                                    <input
+                                        type="url"
+                                        id="channel"
+                                        class="form-control"
+                                        placeholder="youtube.com/@channel"
+                                        required
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="package"
+                                        >Choose Gear (Package)</label
+                                    >
+                                    <select id="package" class="form-control">
+                                        <option value="none">
+                                            Custom Project Scope
+                                        </option>
+                                        <option
+                                            value="Gear 2 - Short-Form Domination"
+                                        >
+                                            Gear 2: Shorts Package ($450/mo)
+                                        </option>
+                                        <option
+                                            value="Gear 3 - YouTube Growth Pack"
+                                        >
+                                            Gear 3: YouTube Growth Pack
+                                            ($1200/mo)
+                                        </option>
+                                        <option
+                                            value="Gear 4 - Cinematic & VFX Elite"
+                                        >
+                                            Gear 4: VFX & Cinematic ($2500/mo)
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="slider-container">
+                                    <div class="slider-val-wrap">
+                                        <label>Monthly Budget Limit</label>
+                                        <span
+                                            class="slider-val"
+                                            id="budget-value"
+                                            >$1,500</span
+                                        >
+                                    </div>
+                                    <input
+                                        type="range"
+                                        id="budget"
+                                        min="300"
+                                        max="5000"
+                                        step="100"
+                                        value="1500"
+                                        class="form-control"
+                                    />
+                                </div>
+                            </div>
+
+                            <div
+                                class="form-group"
+                                style="margin-bottom: 2.5rem"
+                            >
+                                <label for="message"
+                                    >Project Vision Details</label
+                                >
+                                <textarea
+                                    id="message"
+                                    class="form-control"
+                                    placeholder="Describe the flow, pacing, inspiration channels (e.g. MrBeast, MagnatesMedia, anime style)..."
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="glow-btn submit-btn hoverable"
+                            >
+                                <span>Send Project Inquiry</span>
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <a
+                            href="#"
+                            class="logo hoverable"
+                            style="margin-bottom: 1.5rem"
+                        >
+                            <svg
+                                viewBox="0 0 24 24"
+                                width="30"
+                                height="30"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                            >
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path
+                                    d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M2 12h20M12 2v20"
+                                ></path>
+                            </svg>
+                            LUFFY<span>EDITS</span>
+                        </a>
+                        <p>
+                            Cutting-edge, high-retention video edits designed to
+                            break algorithms and drive massive audience
+                            conversion rates.
+                        </p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="#hero" class="hoverable">Home</a></li>
+                            <li>
+                                <a href="#stats" class="hoverable"
+                                    >Bounty Board</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#portfolio" class="hoverable"
+                                    >Video Reel</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#services" class="hoverable"
+                                    >Gear Levels</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Legal & Operations</h4>
+                        <ul>
+                            <li>
+                                <a href="#contact" class="hoverable"
+                                    >Consultations</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#" class="hoverable"
+                                    >Terms of Bounty</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#" class="hoverable"
+                                    >Privacy Compass</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div>
+                        &copy; 2026 LUFFY EDITS. All rights reserved. Created in
+                        the Grand Line.
+                    </div>
+                    <div class="social-icons">
+                        <a
+                            href="#"
+                            class="social-icon hoverable"
+                            aria-label="YouTube"
+                            >YT</a
+                        >
+                        <a
+                            href="#"
+                            class="social-icon hoverable"
+                            aria-label="Twitter"
+                            >TW</a
+                        >
+                        <a
+                            href="#"
+                            class="social-icon hoverable"
+                            aria-label="Instagram"
+                            >IG</a
+                        >
+                        <a
+                            href="#"
+                            class="social-icon hoverable"
+                            aria-label="Discord"
+                            >DC</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Lightbox Modal Player -->
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-content">
+                <button class="lightbox-close hoverable" id="lightbox-close">
+                    Close ✕
+                </button>
+                <div class="lightbox-media" id="lightbox-media">
+                    <!-- Video iframe will be dynamically injected here -->
+                </div>
+            </div>
         </div>
-        <div class="social-icons">
-          <a href="#" class="social-icon hoverable" aria-label="YouTube">YT</a>
-          <a href="#" class="social-icon hoverable" aria-label="Twitter">TW</a>
-          <a href="#" class="social-icon hoverable" aria-label="Instagram">IG</a>
-          <a href="#" class="social-icon hoverable" aria-label="Discord">DC</a>
+
+        <!-- Toast Notification Container -->
+        <div class="toast-container" id="toast-container">
+            <div class="toast" id="submit-toast">
+                <div class="toast-icon">✓</div>
+                <div>
+                    <div class="toast-title">Bounty Claimed!</div>
+                    <div class="toast-message">
+                        Your project details were transmitted. Expect a dispatch
+                        within 24h.
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
 
-  <!-- Lightbox Modal Player -->
-  <div class="lightbox" id="lightbox">
-    <div class="lightbox-content">
-      <button class="lightbox-close hoverable" id="lightbox-close">Close ✕</button>
-      <div class="lightbox-media" id="lightbox-media">
-        <!-- Video iframe will be dynamically injected here -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Notification Container -->
-  <div class="toast-container" id="toast-container">
-    <div class="toast" id="submit-toast">
-      <div class="toast-icon">✓</div>
-      <div>
-        <div class="toast-title">Bounty Claimed!</div>
-        <div class="toast-message">Your project details were transmitted. Expect a dispatch within 24h.</div>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
