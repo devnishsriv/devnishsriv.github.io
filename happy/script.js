@@ -65,11 +65,11 @@ instruction.addEventListener("click", () => {
 
 // Assets list with local paths
 const assets = [
-    "elgatitolover-elgatitoloves.webp", // Swapped to 1st position (above button)
-    "cat-happy.webp",
-    "cat-dancing-on-table-bums3it2isnglult.gif",
-    "dj-cat-dancing-cool-music-hip-hop-jersey-p6e8k1frl2rpaz1w.gif",
-    "voices-cat.webp", // Swapped to 5th position (below right)
+    "meme-assets/elgatitolover-elgatitoloves.webp", // Swapped to 1st position (above button)
+    "meme-assets/cat-happy.webp",
+    "meme-assets/cat-dancing-on-table-bums3it2isnglult.gif",
+    "meme-assets/dj-cat-dancing-cool-music-hip-hop-jersey-p6e8k1frl2rpaz1w.gif",
+    "meme-assets/voices-cat.webp", // Swapped to 5th position (below right)
 ];
 
 function placeCatsCustom() {
