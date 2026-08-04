@@ -26,7 +26,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: none; /* Custom cursor */
+  
 }
 
 html {
@@ -72,48 +72,6 @@ body {
               radial-gradient(circle at 10% 80%, rgba(255, 184, 0, 0.05) 0%, rgba(13, 6, 1, 0) 40%);
 }
 
-/* --- CUSTOM CURSOR --- */
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--secondary);
-  border-radius: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 9999;
-  transition: width 0.2s, height 0.2s, background-color 0.2s;
-  box-shadow: 0 0 10px var(--secondary);
-}
-
-.cursor-outline {
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid rgba(255, 126, 27, 0.5);
-  border-radius: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 9998;
-  transition: transform 0.1s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
-  box-shadow: inset 0 0 8px rgba(255, 126, 27, 0.1), 0 0 12px rgba(255, 126, 27, 0.1);
-}
-
-/* Hover States for Cursor */
-.hovering-link .cursor-dot {
-  width: 12px;
-  height: 12px;
-  background-color: var(--primary);
-  box-shadow: 0 0 15px var(--primary);
-}
-
-.hovering-link .cursor-outline {
-  width: 60px;
-  height: 60px;
-  border-color: var(--primary);
-  transform: translate(-50%, -50%) scale(1.1);
-  background-color: rgba(255, 126, 27, 0.05);
-}
 
 /* --- UTILITY CLASSES --- */
 .container {
@@ -413,7 +371,7 @@ header .container {
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 700;
   line-height: 1.1;
   text-transform: uppercase;
@@ -526,7 +484,7 @@ header .container {
 
 .stat-number {
   font-family: var(--font-heading);
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   color: var(--text-white);
   line-height: 1;
@@ -596,7 +554,7 @@ header .container {
   overflow: hidden;
   border-radius: 20px;
   aspect-ratio: 16/10;
-  cursor: none;
+  
 }
 
 .portfolio-item.hidden {
@@ -1450,50 +1408,92 @@ footer {
 
 @media (max-width: 768px) {
   header {
-    padding: 1.5rem 0;
+    padding: 1rem 0;
   }
-  
+  .container {
+    padding: 0 1rem;
+  }
   .nav-links {
     display: none; /* Handled by burger menu toggle in JS if expanded */
   }
-  
   .menu-btn {
     display: block;
   }
-  
   .hero-title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 10vw, 3rem);
   }
-  
+  .hero-description {
+    font-size: 1rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  .hero-actions a {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
-  
   .portfolio-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  
   .contact-form-panel {
-    padding: 2rem;
+    padding: 1.5rem;
   }
-  
   .form-row {
     grid-template-columns: 1fr;
     gap: 0;
   }
-  
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
     text-align: center;
   }
-  
   .footer-info p {
     margin: 0 auto;
   }
-  
   .footer-bottom {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+  .section-title {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+  .hero {
+    padding-top: 100px;
+  }
+  .hero-actions {
+    flex-direction: column;
+  }
+  .portfolio-filters {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .pricing-card {
+    padding: 2rem 1.5rem;
+  }
+}
+button, a, .hoverable { cursor: pointer; }
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex !important;
+    position: static !important;
+    flex-direction: row !important;
+    background: transparent !important;
+    border-bottom: none !important;
+    width: auto !important;
+    padding: 0 !important;
   }
 }

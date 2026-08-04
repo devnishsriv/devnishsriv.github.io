@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nishant — Freelance Web Dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Outfit', 'sans-serif'],
+                        hand: ['Caveat', 'cursive'],
+                    },
+                    colors: {
+                        paper: '#F4EFEA',
+                        accent: {
+                            yellow: '#FFD84D',
+                            blue: '#6EC1FF',
+                            green: '#5ED48F',
+                            pink: '#FF7FBF',
+                        }
+                    },
+                    animation: {
+                        'float-1': 'float-slow 6s ease-in-out infinite',
+                        'float-2': 'float-med 5s ease-in-out infinite reverse',
+                        'float-3': 'float-fast 4.5s ease-in-out infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        'float-slow': {
+                            '0%, 100%': { transform: 'translateY(0) rotate(-2deg)' },
+                            '50%': { transform: 'translateY(-10px) rotate(1deg)' },
+                        },
+                        'float-med': {
+                            '0%, 100%': { transform: 'translateY(0) rotate(3deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(0deg)' },
+                        },
+                        'float-fast': {
+                            '0%, 100%': { transform: 'translateY(0) rotate(-1deg)' },
+                            '50%': { transform: 'translateY(-8px) rotate(-4deg)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background: #F4EFEA; color: #111; overflow-x: hidden; }
+
+        .bg-paper-texture {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+        }
+        .bg-paper-texture svg { width: 100%; height: 100%; }
+
+        .halftone-overlay {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none;
+            background: radial-gradient(circle, #111 1.5px, transparent 1.6px);
+            background-size: 6px 6px;
+            mix-blend-mode: overlay;
+            opacity: 0.3;
+        }
+
+        .fold-line {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none;
+            background: linear-gradient(175deg, transparent 40%, rgba(0,0,0,0.05) 40.5%, transparent 41%);
+            opacity: 0.2;
+        }
+
+        .sticker-shadow {
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.15))
+                    drop-shadow(4px 4px 0px white)
+                    drop-shadow(-4px -4px 0px white)
+                    drop-shadow(4px -4px 0px white)
+                    drop-shadow(-4px 4px 0px white);
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 2px;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+            transition: all 300ms ease;
+            cursor: default;
+            user-select: none;
+        }
+        .skill-tag:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+        }
+
+        .clip-paper {
+            clip-path: polygon(
+                2% 1%, 15% 3%, 28% 0%, 45% 2%, 60% 0%, 75% 3%, 90% 1%, 98% 3%,
+                100% 15%, 98% 30%, 100% 45%, 97% 60%, 100% 75%, 98% 90%, 95% 98%,
+                80% 96%, 65% 99%, 50% 97%, 35% 99%, 20% 96%, 2% 98%,
+                0% 85%, 3% 70%, 1% 55%, 3% 40%, 0% 25%, 2% 10%
+            );
+        }
+
+        .img-treatment {
+            filter: contrast(1.25) grayscale(100%) brightness(1.1);
+        }
+
+        .btn-craft {
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+            transition: all 300ms ease;
+        }
+        .btn-craft:hover {
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+            transform: scale(1.05) rotate(-1deg);
+        }
+
+        .project-card {
+            transition: all 500ms ease-out;
+        }
+        .project-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+        .project-card:hover .project-img {
+            filter: contrast(1.1) grayscale(0%) brightness(1);
+        }
+        .project-img {
+            transition: filter 500ms ease-out;
+        }
+
+        .tape {
+            position: absolute;
+            width: 80px;
+            height: 24px;
+            background: rgba(255, 216, 77, 0.6);
+            border: 1px solid rgba(255, 216, 77, 0.3);
+            z-index: 10;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-card {
+            opacity: 0;
+            transform: translateY(50px) rotate(0deg);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .skill-card.visible {
+            opacity: 1;
+            transform: translateY(0) rotate(var(--rotate, 0deg));
+        }
+        .skill-card:hover {
+            transform: translateY(-8px) rotate(0deg) scale(1.05) !important;
+            z-index: 50;
+        }
+
+        .noise::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.08;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        .hand-underline {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'%3E%3Cpath d='M2 8 Q50 2 100 7 Q150 12 198 4' stroke='%23FFD84D' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: 100% 12px;
+            padding-bottom: 8px;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F4EFEA; }
+        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #999; }
+
+        .pin {
+            width: 16px; height: 16px; border-radius: 50%;
+            background: #F97316; border: 2px solid #C2410C;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: absolute; z-index: 20;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Paper Texture -->
+<div class="bg-paper-texture">
+    <svg width="100%" height="100%">
+        <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter>
+        <rect width="100%" height="100%" filter="url(#noise)" opacity="0.08"/>
+    </svg>
+</div>
+<div class="halftone-overlay"></div>
+<div class="fold-line"></div>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-paper/80" style="backdrop-filter: blur(4px);">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+        <a href="#" class="font-hand text-2xl text-stone-800 hover:text-accent-yellow transition-colors">~ nishant</a>
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#about" class="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">About</a>
+            <a href="#skills" class="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Skills</a>
+            <a href="#projects" class="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Projects</a>
+            <a href="#contact" class="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Contact</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-stone-600 hover:text-stone-900">
+            <span class="iconify" data-icon="ph:list-bold" data-width="24"></span>
+        </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-paper/95 border-t border-stone-200" style="backdrop-filter: blur(4px);">
+        <div class="px-6 py-4 flex flex-col gap-4">
+            <a href="#about" class="text-sm font-medium text-stone-600 hover:text-stone-900">About</a>
+            <a href="#skills" class="text-sm font-medium text-stone-600 hover:text-stone-900">Skills</a>
+            <a href="#projects" class="text-sm font-medium text-stone-600 hover:text-stone-900">Projects</a>
+            <a href="#contact" class="text-sm font-medium text-stone-600 hover:text-stone-900">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<main class="relative z-10 pt-20">
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-6 md:px-12 py-12">
+        <div class="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center gap-8 md:gap-16">
+
+            <!-- Left: Text -->
+            <div class="flex-1 text-center md:text-left relative z-10">
+                <p class="font-hand text-lg text-stone-400 mb-3 tracking-wide">Nishant — Freelance Web Dev</p>
+                <h1 class="font-display font-extrabold text-[11vw] md:text-[5.5rem] leading-[0.88] tracking-[-0.05em] mix-blend-multiply text-stone-900">
+                    CLEAN.<br>FAST.<br><span class="hand-underline">MODERN.</span>
+                </h1>
+                <p class="font-hand text-xl md:text-2xl text-stone-500 mt-4 md:mt-6 leading-relaxed">
+                    building websites that actually look good ✦
+                </p>
+                <div class="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="#projects" class="btn-craft inline-flex items-center gap-2 bg-accent-yellow text-black font-semibold px-6 py-3 rounded-sm text-sm">
+                        <span class="iconify" data-icon="ph:eye-bold" data-width="16"></span>
+                        View Work
+                    </a>
+                    <a href="#contact" class="btn-craft inline-flex items-center gap-2 bg-white text-stone-800 font-semibold px-6 py-3 rounded-sm text-sm border border-stone-200">
+                        <span class="iconify" data-icon="ph:envelope-bold" data-width="16"></span>
+                        Say Hello
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Image -->
+            <div class="flex-1 flex justify-center relative">
+                <div class="relative animate-float-1">
+                    <svg class="absolute -top-8 -left-8 w-16 h-16 text-accent-yellow animate-float-2" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M24 4 L28 18 L42 18 L30 28 L34 42 L24 33 L14 42 L18 28 L6 18 L20 18 Z"/>
+                    </svg>
+                    <div class="clip-paper w-[280px] md:w-[400px] aspect-[3/4] bg-stone-200 relative overflow-hidden sticker-shadow">
+                        <img src="https://picsum.photos/seed/creative-dev-portrait/400/533.jpg" alt="Portrait" class="w-full h-full object-cover img-treatment">
+                    </div>
+                    <div class="tape -top-3 left-1/2 -translate-x-1/2 rotate-[-2deg]"></div>
+                    <svg class="absolute -bottom-6 -right-6 w-12 h-12 text-accent-pink animate-float-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <circle cx="24" cy="24" r="18"/>
+                        <path d="M18 18 Q24 28 30 18"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="overflow-hidden py-6 border-y border-stone-300/50 relative z-10">
+        <div class="marquee-track whitespace-nowrap">
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">LANDING PAGES</span>
+            <span class="text-accent-yellow text-4xl md:text-6xl mx-4">✦</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">BUSINESS SITES</span>
+            <span class="text-accent-pink text-4xl md:text-6xl mx-4">★</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">E-COMMERCE</span>
+            <span class="text-accent-blue text-4xl md:text-6xl mx-4">✦</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">PORTFOLIOS</span>
+            <span class="text-accent-green text-4xl md:text-6xl mx-4">★</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">CLEAN CODE</span>
+            <span class="text-accent-yellow text-4xl md:text-6xl mx-4">✦</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">MODERN DESIGN</span>
+            <span class="text-accent-pink text-4xl md:text-6xl mx-4">★</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">LANDING PAGES</span>
+            <span class="text-accent-yellow text-4xl md:text-6xl mx-4">✦</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">BUSINESS SITES</span>
+            <span class="text-accent-pink text-4xl md:text-6xl mx-4">★</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">E-COMMERCE</span>
+            <span class="text-accent-blue text-4xl md:text-6xl mx-4">✦</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">PORTFOLIOS</span>
+            <span class="text-accent-green text-4xl md:text-6xl mx-4">★</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">CLEAN CODE</span>
+            <span class="text-accent-yellow text-4xl md:text-6xl mx-4">✦</span>
+            <span class="font-display font-extrabold text-4xl md:text-6xl tracking-[-0.05em] mix-blend-multiply text-stone-900/10 mx-8">MODERN DESIGN</span>
+            <span class="text-accent-pink text-4xl md:text-6xl mx-4">★</span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="px-6 md:px-12 py-20 md:py-32">
+        <div class="max-w-6xl mx-auto reveal">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-3 h-3 bg-accent-yellow rounded-full"></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl tracking-[-0.04em]">About Me</h2>
+            </div>
+            <div class="md:grid md:grid-cols-2 gap-12 items-start">
+                <div class="relative mb-8 md:mb-0">
+                    <div class="clip-paper bg-stone-200 overflow-hidden relative" style="transform: rotate(-2deg);">
+                        <img src="https://picsum.photos/seed/about-workspace/600/450.jpg" alt="Workspace" class="w-full object-cover img-treatment">
+                    </div>
+                    <div class="tape -top-3 left-1/4 -translate-x-1/2 rotate-[3deg]"></div>
+                    <div class="pin -top-2 right-8"></div>
+                    <div class="absolute -bottom-4 -right-4 bg-accent-blue/20 w-24 h-24 rounded-full blur-2xl"></div>
+                </div>
+                <div>
+                    <p class="font-hand text-xl text-stone-500 mb-4">a little about me...</p>
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        I'm Nishant, a freelance web developer who loves making things <span class="skill-tag bg-accent-yellow/30 text-sm font-semibold -rotate-1">look good</span>. I build clean, modern websites for businesses — from local bakeries and CA firms to hostels and beyond.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed mb-4">
+                        Self-taught and genuinely obsessed with getting the details right. Every site I build is something I'm proud to put my name on.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed">
+                        If you need a website that looks professional and works smoothly — let's talk ✦
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <span class="skill-tag bg-accent-yellow font-hand text-lg rotate-[-2deg]">Web Dev</span>
+                        <span class="skill-tag bg-accent-blue font-hand text-lg rotate-[1deg]">Clean Design</span>
+                        <span class="skill-tag bg-accent-green font-hand text-lg rotate-[-1deg]">Freelance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="px-6 md:px-12 py-20 md:py-32 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-4 mb-4 reveal">
+                <div class="w-3 h-3 bg-accent-pink rounded-full"></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl tracking-[-0.04em]">Skill Stack</h2>
+            </div>
+            <p class="font-hand text-xl text-stone-500 mb-16 reveal">things I work with ~</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+
+                <!-- Skill 1: HTML & CSS -->
+                <div class="skill-card relative bg-white/60 border border-stone-200 rounded-sm p-6 noise overflow-hidden group cursor-default"
+                     style="--rotate: -2deg;">
+                    <div class="absolute top-3 right-3 w-8 h-8 bg-accent-yellow rounded-full flex items-center justify-center">
+                        <span class="iconify text-black" data-icon="ph:code-bold" data-width="18"></span>
+                    </div>
+                    <div class="pin -top-2 left-6"></div>
+                    <h3 class="font-display font-bold text-2xl mb-2 mt-2">HTML & CSS</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Solid, semantic markup and styling that looks clean and works right on every screen.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-medium bg-accent-yellow/20 px-2 py-1 rounded-sm">Semantic HTML</span>
+                        <span class="text-xs font-medium bg-accent-yellow/20 px-2 py-1 rounded-sm">Flexbox</span>
+                        <span class="text-xs font-medium bg-accent-yellow/20 px-2 py-1 rounded-sm">CSS Grid</span>
+                    </div>
+                    <svg class="absolute -bottom-4 -right-4 w-20 h-20 text-accent-yellow/10 animate-spin-slow" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="40" cy="40" r="35"/>
+                        <circle cx="40" cy="40" r="25"/>
+                        <circle cx="40" cy="40" r="15"/>
+                    </svg>
+                </div>
+
+                <!-- Skill 2: JavaScript -->
+                <div class="skill-card relative bg-white/60 border border-stone-200 rounded-sm p-6 noise overflow-hidden group cursor-default"
+                     style="--rotate: 1.5deg;">
+                    <div class="absolute top-3 right-3 w-8 h-8 bg-accent-pink rounded-full flex items-center justify-center">
+                        <span class="iconify text-black" data-icon="ph:lightning-bold" data-width="18"></span>
+                    </div>
+                    <div class="pin -top-2 left-6"></div>
+                    <h3 class="font-display font-bold text-2xl mb-2 mt-2">JAVASCRIPT</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Interactivity, logic, and smooth behaviour — without the bloat.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-medium bg-accent-pink/20 px-2 py-1 rounded-sm">ES6+</span>
+                        <span class="text-xs font-medium bg-accent-pink/20 px-2 py-1 rounded-sm">DOM Manipulation</span>
+                        <span class="text-xs font-medium bg-accent-pink/20 px-2 py-1 rounded-sm">Async/Await</span>
+                    </div>
+                    <svg class="absolute -bottom-2 -left-2 w-16 h-16 text-accent-pink/10" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M8 24 Q18 8 24 24 Q30 40 40 24"/>
+                    </svg>
+                </div>
+
+                <!-- Skill 3: React -->
+                <div class="skill-card relative bg-white/60 border border-stone-200 rounded-sm p-6 noise overflow-hidden group cursor-default"
+                     style="--rotate: -1deg;">
+                    <div class="absolute top-3 right-3 w-8 h-8 bg-accent-green rounded-full flex items-center justify-center">
+                        <span class="iconify text-black" data-icon="ph:atom-bold" data-width="18"></span>
+                    </div>
+                    <div class="pin -top-2 left-6"></div>
+                    <h3 class="font-display font-bold text-2xl mb-2 mt-2">REACT</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Component-based UIs that are fast, reusable, and easy to scale.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-medium bg-accent-green/20 px-2 py-1 rounded-sm">Components</span>
+                        <span class="text-xs font-medium bg-accent-green/20 px-2 py-1 rounded-sm">Hooks</span>
+                        <span class="text-xs font-medium bg-accent-green/20 px-2 py-1 rounded-sm">State Mgmt</span>
+                    </div>
+                    <svg class="absolute -bottom-4 -right-4 w-20 h-20 text-accent-green/10 animate-float-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <circle cx="24" cy="24" r="6"/>
+                        <ellipse cx="24" cy="24" rx="20" ry="8"/>
+                        <ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(60 24 24)"/>
+                        <ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(120 24 24)"/>
+                    </svg>
+                </div>
+
+                <!-- Skill 4: Tailwind CSS -->
+                <div class="skill-card relative bg-white/60 border border-stone-200 rounded-sm p-6 noise overflow-hidden group cursor-default"
+                     style="--rotate: 2deg;">
+                    <div class="absolute top-3 right-3 w-8 h-8 bg-[#FF7FBF] rounded-full flex items-center justify-center">
+                        <span class="iconify text-black" data-icon="ph:wind-bold" data-width="18"></span>
+                    </div>
+                    <div class="pin -top-2 left-6"></div>
+                    <h3 class="font-display font-bold text-2xl mb-2 mt-2">TAILWIND CSS</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Utility-first styling that keeps things consistent, fast, and easy to maintain.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-medium bg-[#FF7FBF]/20 px-2 py-1 rounded-sm">Utility Classes</span>
+                        <span class="text-xs font-medium bg-[#FF7FBF]/20 px-2 py-1 rounded-sm">Responsive</span>
+                        <span class="text-xs font-medium bg-[#FF7FBF]/20 px-2 py-1 rounded-sm">Dark Mode</span>
+                    </div>
+                    <svg class="absolute -top-2 -right-2 w-12 h-12 text-[#FF7FBF]/10 animate-float-2" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M24 4 L28 18 L42 18 L30 28 L34 42 L24 33 L14 42 L18 28 L6 18 L20 18 Z"/>
+                    </svg>
+                </div>
+
+                <!-- Skill 5: Figma -->
+                <div class="skill-card relative bg-white/60 border border-stone-200 rounded-sm p-6 noise overflow-hidden group cursor-default"
+                     style="--rotate: -1.5deg;">
+                    <div class="absolute top-3 right-3 w-8 h-8 bg-accent-blue rounded-full flex items-center justify-center">
+                        <span class="iconify text-black" data-icon="ph:figma-logo-bold" data-width="18"></span>
+                    </div>
+                    <div class="pin -top-2 left-6"></div>
+                    <h3 class="font-display font-bold text-2xl mb-2 mt-2">FIGMA</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Designing before building, so every site looks intentional — not accidental.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-medium bg-accent-blue/20 px-2 py-1 rounded-sm">UI Design</span>
+                        <span class="text-xs font-medium bg-accent-blue/20 px-2 py-1 rounded-sm">Wireframing</span>
+                        <span class="text-xs font-medium bg-accent-blue/20 px-2 py-1 rounded-sm">Prototyping</span>
+                    </div>
+                    <svg class="absolute -bottom-6 -left-6 w-24 h-24 text-accent-blue/10 animate-spin-slow" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="10" y="10" width="25" height="25" rx="4"/>
+                        <rect x="45" y="10" width="25" height="25" rx="4"/>
+                        <rect x="10" y="45" width="25" height="25" rx="4"/>
+                        <rect x="45" y="45" width="25" height="25" rx="4"/>
+                    </svg>
+                </div>
+
+                <!-- Skill 6: Responsive Design -->
+                <div class="skill-card relative bg-white/60 border border-stone-200 rounded-sm p-6 noise overflow-hidden group cursor-default"
+                     style="--rotate: 1deg;">
+                    <div class="absolute top-3 right-3 w-8 h-8 bg-accent-yellow rounded-full flex items-center justify-center">
+                        <span class="iconify text-black" data-icon="ph:devices-bold" data-width="18"></span>
+                    </div>
+                    <div class="pin -top-2 left-6"></div>
+                    <h3 class="font-display font-bold text-2xl mb-2 mt-2">RESPONSIVE</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Sites that work beautifully on phones, tablets, and desktops — no compromises.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-medium bg-accent-yellow/20 px-2 py-1 rounded-sm">Mobile First</span>
+                        <span class="text-xs font-medium bg-accent-yellow/20 px-2 py-1 rounded-sm">Cross-browser</span>
+                        <span class="text-xs font-medium bg-accent-yellow/20 px-2 py-1 rounded-sm">Performance</span>
+                    </div>
+                    <svg class="absolute -bottom-4 -right-4 w-16 h-16 text-accent-yellow/10 animate-float-1" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <rect x="4" y="8" width="40" height="28" rx="3"/>
+                        <line x1="16" y1="40" x2="32" y2="40"/>
+                        <line x1="24" y1="36" x2="24" y2="40"/>
+                    </svg>
+                </div>
+
+            </div>
+
+            <!-- Skill Tags Cloud -->
+            <div class="mt-16 text-center reveal">
+                <p class="font-hand text-xl text-stone-500 mb-6">also comfortable with ~</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="skill-tag bg-accent-yellow/40 font-hand text-lg rotate-[-3deg]">Next.js</span>
+                    <span class="skill-tag bg-accent-blue/40 font-hand text-lg rotate-[2deg]">TypeScript</span>
+                    <span class="skill-tag bg-accent-green/40 font-hand text-lg rotate-[-1deg]">GSAP</span>
+                    <span class="skill-tag bg-accent-pink/40 font-hand text-lg rotate-[3deg]">Framer Motion</span>
+                    <span class="skill-tag bg-accent-yellow/40 font-hand text-lg rotate-[-2deg]">Git</span>
+                    <span class="skill-tag bg-accent-blue/40 font-hand text-lg rotate-[1deg]">Vite</span>
+                    <span class="skill-tag bg-accent-green/40 font-hand text-lg rotate-[-3deg]">Vercel</span>
+                    <span class="skill-tag bg-accent-pink/40 font-hand text-lg rotate-[2deg]">CSS Animations</span>
+                    <span class="skill-tag bg-accent-yellow/40 font-hand text-lg rotate-[-1deg]">Three.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="px-6 md:px-12 py-20 md:py-32">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-4 mb-4 reveal">
+                <div class="w-3 h-3 bg-accent-blue rounded-full"></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl tracking-[-0.04em]">Projects</h2>
+            </div>
+            <p class="font-hand text-xl text-stone-500 mb-16 reveal">selected works from my desk ~</p>
+
+            <div class="md:columns-2 gap-8 space-y-8">
+
+                <!-- Project 1 -->
+                <div class="project-card break-inside-avoid relative" style="transform: rotate(-1deg);">
+                    <div class="clip-paper bg-stone-200 overflow-hidden relative">
+                        <a href="/dnshfx/" class="block">
+                            <img src="assets/DnshFx-hero.jpeg" alt="DnshFx Video Portfolio" class="project-img w-full object-cover aspect-[4/3]">
+                        </a>
+                    </div>
+                    <div class="tape -top-3 left-[30%] -translate-x-1/2 rotate-[2deg]"></div>
+                    <div class="mt-4">
+                        <a href="/dnshfx/" class="block hover:opacity-80 transition-opacity">
+                            <h3 class="font-display font-bold text-xl">DnshFx Video Portfolio</h3>
+                        </a>
+                        <p class="text-stone-500 text-sm mt-1">A bold, theme-driven portfolio site with interactive elements and smooth animations</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="skill-tag bg-accent-green/30 text-xs font-semibold">HTML/CSS</span>
+                            <span class="skill-tag bg-accent-blue/30 text-xs font-semibold">JS Animation</span>
+                            <span class="skill-tag bg-accent-yellow/30 text-xs font-semibold">Creative Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card break-inside-avoid relative" style="transform: rotate(1.5deg);">
+                    <div class="clip-paper bg-stone-200 overflow-hidden relative">
+                        <a href="/subdomain/" class="block">
+                            <img src="https://picsum.photos/seed/project-nova/700/600.jpg" alt="Creator Directory" class="project-img w-full object-cover aspect-[4/3]">
+                        </a>
+                    </div>
+                    <div class="tape -top-3 right-[25%] rotate-[-1deg]"></div>
+                    <div class="pin -top-2 left-8"></div>
+                    <div class="mt-4">
+                        <a href="/subdomain/" class="block hover:opacity-80 transition-opacity">
+                            <h3 class="font-display font-bold text-xl">Creator Directory</h3>
+                        </a>
+                        <p class="text-stone-500 text-sm mt-1">A clean, responsive data table for browsing and discovering top creators</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="skill-tag bg-accent-pink/30 text-xs font-semibold">UI/UX</span>
+                            <span class="skill-tag bg-accent-yellow/30 text-xs font-semibold">Table Design</span>
+                            <span class="skill-tag bg-accent-green/30 text-xs font-semibold">Responsive</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Dineconnect -->
+                <div class="project-card break-inside-avoid relative" style="transform: rotate(-0.5deg);">
+                    <div class="clip-paper bg-stone-200 overflow-hidden relative">
+                        <a href="https://dineconnect.media" target="_blank" rel="noopener noreferrer" class="block">
+                            <img src="https://picsum.photos/seed/project-dineconnect/700/550.jpg" alt="DineConnect Media" class="project-img w-full object-cover aspect-[4/3]">
+                        </a>
+                    </div>
+                    <div class="tape -top-3 left-[20%] rotate-[1deg]"></div>
+                    <div class="mt-4">
+                        <a href="https://dineconnect.media" target="_blank" rel="noopener noreferrer" class="block hover:opacity-80 transition-opacity">
+                            <h3 class="font-display font-bold text-xl flex items-center gap-2">
+                                Dineconnect Media
+                                <span class="iconify w-4 h-4 text-stone-400" data-icon="ph:arrow-up-right-bold"></span>
+                            </h3>
+                        </a>
+                        <p class="text-stone-500 text-sm mt-1">Co-founder of "Dineconnect Media" a creator marketing agency</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="skill-tag bg-accent-blue/30 text-xs font-semibold">Web Design</span>
+                            <span class="skill-tag bg-accent-pink/30 text-xs font-semibold">Branding</span>
+                            <span class="skill-tag bg-accent-yellow/30 text-xs font-semibold">Frontend</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card break-inside-avoid relative" style="transform: rotate(1deg);">
+                    <div class="clip-paper bg-stone-200 overflow-hidden relative">
+                        <a href="https://hotmillionsjnp.netlify.app" target="_blank" rel="noopener noreferrer" class="block">
+                            <img src="https://picsum.photos/seed/project-hotmillions/700/550.jpg" alt="Hot Millions JNP" class="project-img w-full object-cover aspect-[4/3]">
+                        </a>
+                    </div>
+                    <div class="tape -top-3 right-[20%] rotate-[-2deg]"></div>
+                    <div class="pin -top-2 left-6"></div>
+                    <div class="mt-4">
+                        <a href="https://hotmillionsjnp.netlify.app" target="_blank" rel="noopener noreferrer" class="block hover:opacity-80 transition-opacity">
+                            <h3 class="font-display font-bold text-xl flex items-center gap-2">
+                                Hot Millions JNP
+                                <span class="iconify w-4 h-4 text-stone-400" data-icon="ph:arrow-up-right-bold"></span>
+                            </h3>
+                        </a>
+                        <p class="text-stone-500 text-sm mt-1">A dynamic, engaging website for a food business — built to look as good as the food</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="skill-tag bg-accent-yellow/30 text-xs font-semibold">Web Dev</span>
+                            <span class="skill-tag bg-accent-pink/30 text-xs font-semibold">UI Design</span>
+                            <span class="skill-tag bg-accent-green/30 text-xs font-semibold">Frontend</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="px-6 md:px-12 py-20 md:py-32 relative">
+        <div class="max-w-6xl mx-auto text-center reveal">
+            <svg class="w-16 h-16 mx-auto mb-6 text-accent-yellow animate-float-1" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M6 14 L24 28 L42 14 M6 14 L6 38 L42 38 L42 14"/>
+            </svg>
+            <h2 class="font-display font-bold text-4xl md:text-6xl tracking-[-0.05em] mb-4">Let's Build<br><span class="hand-underline">Something</span></h2>
+            <p class="font-hand text-xl md:text-2xl text-stone-500 mb-10 max-w-md mx-auto">
+                got a project in mind? I'd love to help ~ ✦
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:realnishant02@gmail.com" class="btn-craft inline-flex items-center gap-2 bg-accent-yellow text-black font-semibold px-8 py-4 rounded-sm text-base">
+                    <span class="iconify" data-icon="ph:envelope-bold" data-width="20"></span>
+                    realnishant02@gmail.com
+                </a>
+                <a href="#" class="btn-craft inline-flex items-center gap-2 bg-white text-stone-800 font-semibold px-8 py-4 rounded-sm text-base border border-stone-200">
+                    <span class="iconify" data-icon="ph:twitter-logo-bold" data-width="20"></span>
+                    Twitter
+                </a>
+                <a href="#" class="btn-craft inline-flex items-center gap-2 bg-white text-stone-800 font-semibold px-8 py-4 rounded-sm text-base border border-stone-200">
+                    <span class="iconify" data-icon="ph:github-logo-bold" data-width="20"></span>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-stone-300/50 py-8 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="font-hand text-lg text-stone-500">crafted with ♥ and too much coffee</p>
+            <p class="text-xs text-stone-400">© 2025 Nishant — All rights reserved</p>
+        </div>
+    </footer>
+
+</main>
+
+<script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const skillCards = document.querySelectorAll('.skill-card');
+
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Skill cards with staggered reveal
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const cards = document.querySelectorAll('.skill-card');
+                const cardIndex = Array.from(cards).indexOf(entry.target);
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, cardIndex * 120);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    skillCards.forEach(card => skillObserver.observe(card));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Subtle parallax on mouse move
+    document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 2;
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        document.querySelectorAll('.skill-card').forEach((card, i) => {
+            const speed = 0.3 + (i * 0.1);
+            card.style.transform = card.classList.contains('visible')
+                ? `translateY(0) rotate(${getComputedStyle(card).getPropertyValue('--rotate')}) translate(${x * speed}px, ${y * speed}px)`
+                : '';
+        });
+    });
+</script>
+
+</body>
+</html>

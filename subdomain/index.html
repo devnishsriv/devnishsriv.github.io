@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=1200, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Creator Directory</title>
         <link
             href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@500&display=swap"
@@ -353,6 +353,25 @@
             html {
                 min-width: 1200px;
             }
+        @media (max-width: 1024px) {
+            .table-card {
+                overflow-x: auto;
+            }
+            table {
+                min-width: 800px;
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 16px 40px;
+            }
+            .header-title {
+                font-size: 24px;
+            }
+            th, td {
+                padding: 12px;
+            }
+        }
         </style>
     </head>
     <body>

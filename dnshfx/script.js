@@ -77,40 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- CUSTOM CURSOR TRACKER ---
-  const dot = document.getElementById('cursor-dot');
-  const outline = document.getElementById('cursor-outline');
-  
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let outlineX = mouseX;
-  let outlineY = mouseY;
-  
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    
-    // Direct dot tracking
-    dot.style.left = `${mouseX}px`;
-    dot.style.top = `${mouseY}px`;
-  });
-
-  // Cursor interpolation logic for the lagging ring
-  function animateCursor() {
-    let dx = mouseX - outlineX;
-    let dy = mouseY - outlineY;
-    
-    // Inertia factor (0.15)
-    outlineX += dx * 0.15;
-    outlineY += dy * 0.15;
-    
-    outline.style.left = `${outlineX}px`;
-    outline.style.top = `${outlineY}px`;
-    
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
   // Highlight links and buttons on hover
   const hoverables = document.querySelectorAll('.hoverable, button, a, select, input, textarea');
   hoverables.forEach(item => {
@@ -123,14 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Hide custom cursor when mouse leaves window
-  document.addEventListener('mouseleave', () => {
-    dot.style.opacity = '0';
-    outline.style.opacity = '0';
-  });
-  document.addEventListener('mouseenter', () => {
-    dot.style.opacity = '1';
-    outline.style.opacity = '1';
+  // Mouse position tracking for particle canvas interaction
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   });
 
   // --- FLOATING CANVAS PARTICLES ---
